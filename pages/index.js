@@ -28,7 +28,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <div className="home-page">
       <Head>
         <title>Degaan Real Estate | Premium Properties & Construction Services</title>
         <meta name="description" content="Discover exclusive properties and expert construction services in Somaliland" />
@@ -118,6 +118,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
