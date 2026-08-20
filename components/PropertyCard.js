@@ -14,11 +14,11 @@ export default function PropertyCard({ property }) {
 
       <div className="property-content">
         <h3>{property.address}</h3>
-        <p className="location">📍 {property.location}</p>
+        <p className="location">{property.location}</p>
 
         <div className="property-specs">
-          <span>🛏️ {property.bedrooms} beds</span>
-          <span>📐 {property.size} sqft</span>
+          <span>{property.bedrooms} beds</span>
+          <span>{property.size} sq ft</span>
         </div>
 
         <p className="description">

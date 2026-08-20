@@ -30,15 +30,14 @@ export default function Footer() {
 
           <div className="footer-section">
             <h4>Contact</h4>
-            <p>📍 Burjomar, Hargeisa, Somaliland</p>
-            <p>📞 +252 638 888 250</p>
-            <p>✉️ info@degaanrealestate.com</p>
+            <p>Burjomar, Hargeisa, Somaliland</p>
+            <p>+252 638 888 250</p>
+            <p>info@degaanrealestate.com</p>
           </div>
         </div>
 
         <div className="footer-bottom">
           <p>&copy; 2025 Degaan Real Estate. All rights reserved.</p>
-          <p>Developed with ❤️ for real estate excellence</p>
         </div>
       </div>
     </footer>

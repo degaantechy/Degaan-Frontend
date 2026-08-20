@@ -16,15 +16,18 @@ export default function Header() {
         <button
           className="menu-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
         >
           ☰
         </button>
 
-        <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-          <Link href="/">Home</Link>
-          <Link href="/properties">Properties</Link>
-          <Link href="/contact">Contact</Link>
-          <a href="https://wa.link/9pfqyn" target="_blank" rel="noopener noreferrer">
+        <nav id="primary-navigation" className={`nav ${menuOpen ? 'open' : ''}`}>
+          <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link href="/properties" onClick={() => setMenuOpen(false)}>Properties</Link>
+          <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+          <a href="https://wa.link/9pfqyn" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
             WhatsApp
           </a>
         </nav>

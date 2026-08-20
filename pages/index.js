@@ -42,17 +42,17 @@ export default function Home() {
           <h2>Our Services</h2>
           <div className="services-grid">
             <div className="service-card">
-              <h3>🏗️ Construction Services</h3>
+              <h3>Construction Services</h3>
               <p>Complete end-to-end construction with premium materials and expert project management</p>
               <Link href="/contact?service=construction">Get Quote</Link>
             </div>
             <div className="service-card">
-              <h3>🏠 Buy & Sell Properties</h3>
+              <h3>Buy & Sell Properties</h3>
               <p>Expert guidance for buying or selling properties with market analysis</p>
               <Link href="/properties">Browse Properties</Link>
             </div>
             <div className="service-card">
-              <h3>📊 Property Valuation</h3>
+              <h3>Property Valuation</h3>
               <p>Accurate property valuation using market analysis and professional assessment</p>
               <Link href="/contact?service=valuation">Get Valuation</Link>
             </div>

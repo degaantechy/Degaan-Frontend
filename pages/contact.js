@@ -37,19 +37,19 @@ export default function Contact() {
           <div className="contact-info">
             <h2>Get in Touch</h2>
             <div className="info-item">
-              <h4>📍 Location</h4>
+              <h4>Location</h4>
               <p>Burjomar, Hargeisa, Somaliland</p>
             </div>
             <div className="info-item">
-              <h4>📞 Phone</h4>
+              <h4>Phone</h4>
               <p>+252 638 888 250</p>
             </div>
             <div className="info-item">
-              <h4>✉️ Email</h4>
+              <h4>Email</h4>
               <p>info@degaanrealestate.com</p>
             </div>
             <div className="info-item">
-              <h4>💬 WhatsApp</h4>
+              <h4>WhatsApp</h4>
               <a href="https://wa.link/9pfqyn" target="_blank" rel="noopener noreferrer">
                 Chat on WhatsApp
               </a>
