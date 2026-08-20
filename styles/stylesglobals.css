@@ -55,19 +55,19 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.1rem 0;
+  padding: 0.55rem 0;
 }
 
-.logo a {
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
 }
 
-.logo h1 {
-  color: var(--primary-color);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin: 0;
+.brand-logo-image {
+  display: block;
+  width: 126px;
+  height: auto;
 }
 
 .nav {
@@ -694,6 +694,13 @@ textarea {
   margin-bottom: 1rem;
 }
 
+.footer-brand-logo {
+  display: block;
+  width: 155px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
 .footer-section ul {
   list-style: none;
 }
@@ -804,6 +811,10 @@ textarea:focus-visible {
 
   .properties-grid {
     grid-template-columns: 1fr;
+  }
+
+  .brand-logo-image {
+    width: 112px;
   }
 
   .contact-form-section {

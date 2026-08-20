@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 
 export default function Header() {
@@ -7,11 +8,16 @@ export default function Header() {
   return (
     <header className="header">
       <div className="container header-content">
-        <div className="logo">
-          <Link href="/">
-            <h1>Degaan Real Estate</h1>
-          </Link>
-        </div>
+        <Link href="/" className="brand-logo" aria-label="Degaan Real Estate home">
+          <Image
+            src="/images/degaan-logo.png"
+            alt="Degaan Real Estate"
+            width={1200}
+            height={833}
+            className="brand-logo-image"
+            priority
+          />
+        </Link>
 
         <button
           className="menu-toggle"

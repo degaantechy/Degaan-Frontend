@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -6,7 +7,13 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-section">
-            <h4>Degaan Real Estate</h4>
+            <Image
+              src="/images/degaan-logo-gold.png"
+              alt="Degaan Real Estate"
+              width={900}
+              height={626}
+              className="footer-brand-logo"
+            />
             <p>Your trusted partner in real estate and construction services in Somaliland</p>
           </div>
 
