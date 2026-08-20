@@ -10,10 +10,10 @@ export default function Header() {
       <div className="container header-content">
         <Link href="/" className="brand-logo" aria-label="Degaan Real Estate home">
           <Image
-            src="/images/degaan-logo.png"
+            src="/images/degaan-mark.png"
             alt="Degaan Real Estate"
-            width={1200}
-            height={833}
+            width={512}
+            height={512}
             className="brand-logo-image"
             priority
           />

@@ -43,9 +43,11 @@ textarea {
 
 /* Header */
 .header {
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 4px 18px rgba(44, 50, 64, 0.04);
+  background: rgba(255, 255, 255, 0.74);
+  border-bottom: 1px solid rgba(44, 50, 64, 0.08);
+  box-shadow: none;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -55,7 +57,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.55rem 0;
+  padding: 0.4rem 0;
 }
 
 .brand-logo {
@@ -66,20 +68,21 @@ textarea {
 
 .brand-logo-image {
   display: block;
-  width: 126px;
+  width: 48px;
   height: auto;
 }
 
 .nav {
   display: flex;
-  gap: 2rem;
+  gap: 1.75rem;
 }
 
 .nav a {
   text-decoration: none;
   color: var(--primary-color);
+  font-size: 0.95rem;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: color 0.2s;
 }
 
 .nav a:hover {
@@ -103,8 +106,10 @@ textarea {
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--surface-color);
-    border-bottom: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.94);
+    border-bottom: 1px solid rgba(44, 50, 64, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     padding: 1.25rem 24px;
     gap: 1rem;
   }
@@ -814,7 +819,7 @@ textarea:focus-visible {
   }
 
   .brand-logo-image {
-    width: 112px;
+    width: 42px;
   }
 
   .contact-form-section {
