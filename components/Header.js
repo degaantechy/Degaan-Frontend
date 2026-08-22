@@ -31,6 +31,7 @@ export default function Header() {
 
         <nav id="primary-navigation" className={`nav ${menuOpen ? 'open' : ''}`}>
           <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link href="/#projects" onClick={() => setMenuOpen(false)}>Projects</Link>
           <Link href="/properties" onClick={() => setMenuOpen(false)}>Properties</Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
           <a href="https://wa.link/9pfqyn" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>

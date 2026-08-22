@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropertyCard from '../components/PropertyCard'
@@ -57,6 +58,65 @@ export default function Home() {
               <Link href="/contact?service=valuation">Get Valuation</Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="projects-showcase" id="projects">
+        <div className="container">
+          <div className="section-heading section-heading-split">
+            <div>
+              <p className="section-kicker">Our portfolio</p>
+              <h2>Projects shaped around modern living</h2>
+            </div>
+            <p>
+              Thoughtfully planned homes that balance comfort, privacy and long-term value.
+            </p>
+          </div>
+
+          <article className="portfolio-feature">
+            <Link href="/projects/sareedo-court" className="portfolio-image-link" aria-label="View Sareedo Court project">
+              <Image
+                src="/images/projects/sareedo-court/residence.webp"
+                alt="Sareedo Court modern four-bedroom residence"
+                width={1448}
+                height={1086}
+                className="portfolio-image"
+                sizes="(max-width: 900px) 100vw, 58vw"
+              />
+            </Link>
+
+            <div className="portfolio-copy">
+              <div className="portfolio-status-row">
+                <span className="portfolio-number">01</span>
+                <span className="project-status">Upcoming · February 2027</span>
+              </div>
+              <p className="portfolio-location">Masala · Behind UNICEF Office</p>
+              <h3>Sareedo Court</h3>
+              <p className="portfolio-summary">
+                Affordable, high-finish family homes with four bedrooms, three bathrooms,
+                a private DSQ, equipped kitchens, solar water heating and landscaped outdoor spaces.
+              </p>
+
+              <dl className="portfolio-meta">
+                <div>
+                  <dt>Plot</dt>
+                  <dd>12 × 24 m</dd>
+                </div>
+                <div>
+                  <dt>From</dt>
+                  <dd>USD 63.4K</dd>
+                </div>
+                <div>
+                  <dt>Completion</dt>
+                  <dd>December 2027</dd>
+                </div>
+              </dl>
+
+              <Link href="/projects/sareedo-court" className="project-link">
+                Explore Sareedo Court <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </article>
         </div>
       </section>
 
