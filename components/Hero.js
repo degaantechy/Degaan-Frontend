@@ -16,6 +16,11 @@ export default function Hero() {
         poster="/videos/home-hero-poster.webp"
         aria-hidden="true"
       >
+        <source
+          src="/videos/home-hero-mobile.mp4"
+          type="video/mp4"
+          media="(max-width: 768px)"
+        />
         <source src="/videos/home-hero.mp4" type="video/mp4" />
       </video>
       <div className="hero-content">
