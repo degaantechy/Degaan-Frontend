@@ -50,7 +50,7 @@ export default function Contact() {
             </div>
             <div className="info-item">
               <h4>WhatsApp</h4>
-              <a href="https://wa.link/9pfqyn" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/252638888250" target="_blank" rel="noopener noreferrer">
                 Chat on WhatsApp
               </a>
             </div>

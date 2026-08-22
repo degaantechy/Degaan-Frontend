@@ -46,7 +46,7 @@ export default function SareedoCourt() {
               <div className="project-hero-actions">
                 <Link href="/contact?project=sareedo-court" className="btn-primary">Register Interest</Link>
                 <a
-                  href="https://wa.link/9pfqyn"
+                  href="https://wa.me/252638888250"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-secondary"

@@ -90,7 +90,7 @@ export default function PropertyDetail() {
             </div>
 
             <div className="property-actions">
-              <a href="https://wa.link/9pfqyn" target="_blank" rel="noopener noreferrer" className="btn-primary">
+              <a href="https://wa.me/252638888250" target="_blank" rel="noopener noreferrer" className="btn-primary">
                 Contact on WhatsApp
               </a>
               <Link href={`/contact?property=${id}`} className="btn-secondary">
