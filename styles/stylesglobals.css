@@ -190,8 +190,8 @@ textarea {
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(22, 26, 34, 0.38) 0%, rgba(22, 26, 34, 0.62) 100%),
-    linear-gradient(90deg, rgba(44, 50, 64, 0.24), rgba(44, 50, 64, 0.08));
+    linear-gradient(90deg, rgba(22, 26, 34, 0.84) 0%, rgba(22, 26, 34, 0.66) 43%, rgba(22, 26, 34, 0.28) 100%),
+    linear-gradient(180deg, rgba(22, 26, 34, 0.14) 0%, rgba(22, 26, 34, 0.36) 100%);
   pointer-events: none;
 }
 
@@ -206,7 +206,9 @@ textarea {
 }
 
 .hero-content {
-  width: min(100%, 880px);
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  text-align: left;
 }
 
 .hero-content h1 {
@@ -219,7 +221,7 @@ textarea {
 
 .hero-content p {
   max-width: 680px;
-  margin: 0 auto 2rem;
+  margin: 0 0 2rem;
   font-size: 1.15rem;
   color: #f2f3f5;
   text-shadow: 0 1px 16px rgba(0, 0, 0, 0.3);
@@ -228,7 +230,7 @@ textarea {
 .hero-buttons {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -240,6 +242,23 @@ textarea {
   .hero {
     min-height: min(680px, 78svh);
     padding: 4rem 1rem;
+    background-image: url('/videos/home-hero-mobile-poster.webp');
+  }
+
+  .hero::after {
+    background: linear-gradient(180deg, rgba(22, 26, 34, 0.4) 0%, rgba(22, 26, 34, 0.68) 100%);
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-content p {
+    margin: 0 auto 2rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
   }
 }
 
