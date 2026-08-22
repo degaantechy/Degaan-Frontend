@@ -172,7 +172,7 @@ export default function Home() {
           <p>Contact us today for a free consultation</p>
           <div className="cta-buttons">
             <Link href="/contact" className="btn-primary">Schedule Consultation</Link>
-            <a href="https://wa.link/9pfqyn" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+            <a href="https://wa.me/252638888250" target="_blank" rel="noopener noreferrer" className="btn-secondary">
               Chat on WhatsApp
             </a>
           </div>
