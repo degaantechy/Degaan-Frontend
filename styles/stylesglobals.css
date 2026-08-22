@@ -171,11 +171,42 @@ textarea {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(120deg, #2c3240 0%, #363d4d 100%);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: clamp(520px, 72vh, 760px);
+  place-items: center;
+  overflow: hidden;
+  background: #2c3240 url('/videos/home-hero-poster.webp') center / cover no-repeat;
   color: white;
   padding: 6.5rem 2rem;
   text-align: center;
   border-radius: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(22, 26, 34, 0.38) 0%, rgba(22, 26, 34, 0.62) 100%),
+    linear-gradient(90deg, rgba(44, 50, 64, 0.24), rgba(44, 50, 64, 0.08));
+  pointer-events: none;
+}
+
+.hero-video {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-content {
+  width: min(100%, 880px);
 }
 
 .hero-content h1 {
@@ -183,13 +214,15 @@ textarea {
   margin-bottom: 1rem;
   color: white;
   letter-spacing: -0.04em;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.28);
 }
 
 .hero-content p {
   max-width: 680px;
   margin: 0 auto 2rem;
   font-size: 1.15rem;
-  color: #e1e4e9;
+  color: #f2f3f5;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.3);
 }
 
 .hero-buttons {
@@ -205,7 +238,14 @@ textarea {
   }
 
   .hero {
-    padding: 3rem 1rem;
+    min-height: min(680px, 78svh);
+    padding: 4rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
   }
 }
 
@@ -1158,191 +1198,3 @@ textarea {
   margin-bottom: 0.5rem;
 }
 
-.footer-section a {
-  color: #d7dae0;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-section a:hover {
-  color: var(--accent-color);
-}
-
-.footer-section p {
-  color: #d7dae0;
-}
-
-.footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  padding-top: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
-/* Main content */
-.main-content {
-  min-height: calc(100vh - 200px);
-  padding: 0;
-}
-
-.main-content > .container {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: var(--secondary-color);
-  letter-spacing: -0.035em;
-}
-
-h2 {
-  color: var(--secondary-color);
-  letter-spacing: -0.025em;
-}
-
-.text-center {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.results-count {
-  color: var(--muted-text);
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-}
-
-/* Loading & Error States */
-.loading {
-  text-align: center;
-  padding: 2rem;
-  color: var(--muted-text);
-}
-
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid rgba(205, 153, 51, 0.35);
-  outline-offset: 3px;
-}
-
-.error {
-  background: #ffe6e6;
-  border-left: 4px solid var(--error-color);
-  color: var(--error-color);
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-.success {
-  background: #e6ffe6;
-  border-left: 4px solid var(--success-color);
-  color: var(--success-color);
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .properties-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .brand-logo-image {
-    width: 42px;
-  }
-
-  .contact-form-section {
-    padding: 1.5rem;
-  }
-
-  .projects-showcase,
-  .project-hero,
-  .project-overview,
-  .project-features-section,
-  .project-gallery-section,
-  .project-enquiry {
-    padding: 4rem 1.25rem;
-  }
-
-  .section-heading-split,
-  .portfolio-feature,
-  .project-hero-content,
-  .project-overview-grid,
-  .project-floor-plan {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .portfolio-feature {
-    min-height: auto;
-  }
-
-  .portfolio-image-link {
-    min-height: 360px;
-  }
-
-  .portfolio-copy {
-    padding: 2rem 1.5rem 2.5rem;
-  }
-
-  .portfolio-status-row {
-    margin-bottom: 2rem;
-  }
-
-  .portfolio-meta {
-    grid-template-columns: 1fr;
-  }
-
-  .portfolio-meta div,
-  .portfolio-meta div + div {
-    padding: 0.75rem 0;
-    border: 0;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .portfolio-meta div:last-child {
-    border-bottom: 0;
-  }
-
-  .project-back-link {
-    margin-bottom: 2.5rem;
-  }
-
-  .project-hero-facts,
-  .project-specs {
-    grid-template-columns: 1fr;
-  }
-
-  .project-specs div:nth-child(even) {
-    padding-left: 0;
-    border-left: 0;
-  }
-
-  .project-features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project-floor-plan {
-    padding: 1.5rem;
-  }
-
-  .project-enquiry-inner {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
