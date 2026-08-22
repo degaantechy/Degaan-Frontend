@@ -1,29 +1,31 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function ContactForm({ onSubmit, loading }) {
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const { t } = useLanguage()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
       <div className="form-group">
-        <label>Name *</label>
+        <label>{t('form.name')} *</label>
         <input
-          {...register('name', { required: 'Name is required' })}
+          {...register('name', { required: t('form.nameRequired') })}
           type="text"
-          placeholder="Your name"
+          placeholder={t('form.namePlaceholder')}
         />
         {errors.name && <span className="error">{errors.name.message}</span>}
       </div>
 
       <div className="form-group">
-        <label>Email *</label>
+        <label>{t('form.email')} *</label>
         <input
           {...register('email', {
-            required: 'Email is required',
+            required: t('form.emailRequired'),
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Invalid email address',
+              message: t('form.emailInvalid'),
             },
           })}
           type="email"
@@ -33,9 +35,9 @@ export default function ContactForm({ onSubmit, loading }) {
       </div>
 
       <div className="form-group">
-        <label>Phone *</label>
+        <label>{t('form.phone')} *</label>
         <input
-          {...register('phone', { required: 'Phone is required' })}
+          {...register('phone', { required: t('form.phoneRequired') })}
           type="tel"
           placeholder="+252..."
         />
@@ -43,28 +45,28 @@ export default function ContactForm({ onSubmit, loading }) {
       </div>
 
       <div className="form-group">
-        <label>Interest Type *</label>
-        <select {...register('interest_type', { required: 'Please select' })}>
-          <option value="">Select...</option>
-          <option value="buy">Buy Property</option>
-          <option value="sell">Sell Property</option>
-          <option value="construction">Construction</option>
-          <option value="investment">Investment</option>
+        <label>{t('form.interest')} *</label>
+        <select {...register('interest_type', { required: t('form.selectRequired') })}>
+          <option value="">{t('form.select')}</option>
+          <option value="buy">{t('form.buy')}</option>
+          <option value="sell">{t('form.sell')}</option>
+          <option value="construction">{t('form.construction')}</option>
+          <option value="investment">{t('form.investment')}</option>
         </select>
         {errors.interest_type && <span className="error">{errors.interest_type.message}</span>}
       </div>
 
       <div className="form-group">
-        <label>Message</label>
+        <label>{t('form.message')}</label>
         <textarea
           {...register('message')}
-          placeholder="Tell us more about your inquiry..."
+          placeholder={t('form.messagePlaceholder')}
           rows="5"
         ></textarea>
       </div>
 
       <button type="submit" className="btn-primary" disabled={loading}>
-        {loading ? 'Sending...' : 'Send Message'}
+        {loading ? t('form.sending') : t('form.send')}
       </button>
     </form>
   )

@@ -2,10 +2,12 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropertyCard from '../components/PropertyCard'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Properties() {
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState(true)
+  const { t } = useLanguage()
   const [filters, setFilters] = useState({
     min_price: '',
     max_price: '',
@@ -57,40 +59,40 @@ export default function Properties() {
   return (
     <>
       <Head>
-        <title>Browse Properties | Degaan Real Estate</title>
-        <meta name="description" content="Search and browse our available properties" />
+        <title>{t('properties.seoTitle')}</title>
+        <meta name="description" content={t('properties.seoDescription')} />
       </Head>
 
       <div className="container">
-        <h1>Browse Properties</h1>
+        <h1>{t('properties.title')}</h1>
 
         <div className="filters-section">
-          <h3>Filter Properties</h3>
+          <h3>{t('properties.filterTitle')}</h3>
           <div className="filters-grid">
             <div className="filter-group">
-              <label>Min Price</label>
+              <label>{t('properties.minPrice')}</label>
               <input
                 type="number"
                 name="min_price"
                 value={filters.min_price}
                 onChange={handleFilterChange}
-                placeholder="Min price"
+                placeholder={t('properties.minPricePlaceholder')}
               />
             </div>
             <div className="filter-group">
-              <label>Max Price</label>
+              <label>{t('properties.maxPrice')}</label>
               <input
                 type="number"
                 name="max_price"
                 value={filters.max_price}
                 onChange={handleFilterChange}
-                placeholder="Max price"
+                placeholder={t('properties.maxPricePlaceholder')}
               />
             </div>
             <div className="filter-group">
-              <label>Min Bedrooms</label>
+              <label>{t('properties.minBedrooms')}</label>
               <select name="min_bedrooms" value={filters.min_bedrooms} onChange={handleFilterChange}>
-                <option value="">Any</option>
+                <option value="">{t('properties.any')}</option>
                 <option value="1">1+</option>
                 <option value="2">2+</option>
                 <option value="3">3+</option>
@@ -98,25 +100,25 @@ export default function Properties() {
               </select>
             </div>
             <div className="filter-group">
-              <label>Status</label>
+              <label>{t('properties.status')}</label>
               <select name="status" value={filters.status} onChange={handleFilterChange}>
-                <option value="">Any</option>
-                <option value="available">Available</option>
-                <option value="sold">Sold</option>
-                <option value="construction">Under Construction</option>
+                <option value="">{t('properties.any')}</option>
+                <option value="available">{t('properties.available')}</option>
+                <option value="sold">{t('properties.sold')}</option>
+                <option value="construction">{t('properties.construction')}</option>
               </select>
             </div>
           </div>
           <button onClick={handleReset} className="btn-secondary">
-            Reset Filters
+            {t('properties.reset')}
           </button>
         </div>
 
         {loading ? (
-          <p>Loading properties...</p>
+          <p>{t('properties.loading')}</p>
         ) : properties.length > 0 ? (
           <>
-            <p className="results-count">Found {properties.length} properties</p>
+            <p className="results-count">{t('properties.results', { count: properties.length })}</p>
             <div className="properties-grid">
               {properties.map((property) => (
                 <PropertyCard key={property.id} property={property} />
@@ -124,7 +126,7 @@ export default function Properties() {
             </div>
           </>
         ) : (
-          <p>No properties found matching your criteria</p>
+          <p>{t('properties.noResults')}</p>
         )}
       </div>
     </>

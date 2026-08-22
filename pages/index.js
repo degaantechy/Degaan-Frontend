@@ -6,10 +6,12 @@ import axios from 'axios'
 import PropertyCard from '../components/PropertyCard'
 import Hero from '../components/Hero'
 import ContactForm from '../components/ContactForm'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Home() {
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState(true)
+  const { language, t } = useLanguage()
 
   useEffect(() => {
     fetchProperties()
@@ -31,8 +33,9 @@ export default function Home() {
   return (
     <div className="home-page">
       <Head>
-        <title>Degaan Real Estate | Premium Properties & Construction Services</title>
-        <meta name="description" content="Discover exclusive properties and expert construction services in Somaliland" />
+        <title>{t('home.seoTitle')}</title>
+        <meta name="description" content={t('home.seoDescription')} />
+        <meta property="og:locale" content={language === 'so' ? 'so_SO' : 'en_US'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
@@ -40,22 +43,22 @@ export default function Home() {
 
       <section className="services">
         <div className="container">
-          <h2>Our Services</h2>
+          <h2>{t('home.servicesTitle')}</h2>
           <div className="services-grid">
             <div className="service-card">
-              <h3>Construction Services</h3>
-              <p>Complete end-to-end construction with premium materials and expert project management</p>
-              <Link href="/contact?service=construction">Get Quote</Link>
+              <h3>{t('home.constructionTitle')}</h3>
+              <p>{t('home.constructionText')}</p>
+              <Link href="/contact?service=construction">{t('home.quote')}</Link>
             </div>
             <div className="service-card">
-              <h3>Buy & Sell Properties</h3>
-              <p>Expert guidance for buying or selling properties with market analysis</p>
-              <Link href="/properties">Browse Properties</Link>
+              <h3>{t('home.buySellTitle')}</h3>
+              <p>{t('home.buySellText')}</p>
+              <Link href="/properties">{t('home.browse')}</Link>
             </div>
             <div className="service-card">
-              <h3>Property Valuation</h3>
-              <p>Accurate property valuation using market analysis and professional assessment</p>
-              <Link href="/contact?service=valuation">Get Valuation</Link>
+              <h3>{t('home.valuationTitle')}</h3>
+              <p>{t('home.valuationText')}</p>
+              <Link href="/contact?service=valuation">{t('home.getValuation')}</Link>
             </div>
           </div>
         </div>
@@ -65,19 +68,19 @@ export default function Home() {
         <div className="container">
           <div className="section-heading section-heading-split">
             <div>
-              <p className="section-kicker">Our portfolio</p>
-              <h2>Projects shaped around modern living</h2>
+              <p className="section-kicker">{t('home.portfolioKicker')}</p>
+              <h2>{t('home.portfolioTitle')}</h2>
             </div>
             <p>
-              Thoughtfully planned homes that balance comfort, privacy and long-term value.
+              {t('home.portfolioIntro')}
             </p>
           </div>
 
           <article className="portfolio-feature">
-            <Link href="/projects/sareedo-court" className="portfolio-image-link" aria-label="View Sareedo Court project">
+            <Link href="/projects/sareedo-court" className="portfolio-image-link" aria-label={t('home.sareedoLabel')}>
               <Image
                 src="/images/projects/sareedo-court/residence.webp"
-                alt="Sareedo Court modern four-bedroom residence"
+                alt={t('home.sareedoAlt')}
                 width={1448}
                 height={1086}
                 className="portfolio-image"
@@ -88,32 +91,31 @@ export default function Home() {
             <div className="portfolio-copy">
               <div className="portfolio-status-row">
                 <span className="portfolio-number">01</span>
-                <span className="project-status">Upcoming · February 2027</span>
+                <span className="project-status">{t('home.upcoming')}</span>
               </div>
-              <p className="portfolio-location">Masala · Behind UNICEF Office</p>
+              <p className="portfolio-location">{t('home.sareedoLocation')}</p>
               <h3>Sareedo Court</h3>
               <p className="portfolio-summary">
-                Affordable, high-finish family homes with four bedrooms, three bathrooms,
-                a private DSQ, equipped kitchens, solar water heating and landscaped outdoor spaces.
+                {t('home.sareedoSummary')}
               </p>
 
               <dl className="portfolio-meta">
                 <div>
-                  <dt>Plot</dt>
+                  <dt>{t('home.plot')}</dt>
                   <dd>12 × 24 m</dd>
                 </div>
                 <div>
-                  <dt>From</dt>
+                  <dt>{t('home.from')}</dt>
                   <dd>USD 63.4K</dd>
                 </div>
                 <div>
-                  <dt>Completion</dt>
-                  <dd>December 2027</dd>
+                  <dt>{t('home.completion')}</dt>
+                  <dd>{t('home.completionDate')}</dd>
                 </div>
               </dl>
 
               <Link href="/projects/sareedo-court" className="project-link">
-                Explore Sareedo Court <span aria-hidden="true">→</span>
+                {t('home.exploreSareedo')} <span aria-hidden="true">→</span>
               </Link>
             </div>
           </article>
@@ -122,9 +124,9 @@ export default function Home() {
 
       <section className="featured-properties">
         <div className="container">
-          <h2>Featured Properties</h2>
+          <h2>{t('home.featured')}</h2>
           {loading ? (
-            <p>Loading properties...</p>
+            <p>{t('home.loading')}</p>
           ) : properties.length > 0 ? (
             <div className="properties-grid">
               {properties.map((property) => (
@@ -132,11 +134,11 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <p>No properties available</p>
+            <p>{t('home.noneAvailable')}</p>
           )}
           <div className="text-center">
             <Link href="/properties" className="btn-primary">
-              View All Properties
+              {t('home.viewAll')}
             </Link>
           </div>
         </div>
@@ -144,23 +146,23 @@ export default function Home() {
 
       <section className="why-choose-us">
         <div className="container">
-          <h2>Why Choose Degaan Real Estate</h2>
+          <h2>{t('home.whyTitle')}</h2>
           <div className="reasons-grid">
             <div className="reason">
-              <h4>Expert Team</h4>
-              <p>Professional engineers and real estate experts with years of experience</p>
+              <h4>{t('home.expertTitle')}</h4>
+              <p>{t('home.expertText')}</p>
             </div>
             <div className="reason">
-              <h4>Quality Assured</h4>
-              <p>Earthquake-resistant structures and premium materials in all projects</p>
+              <h4>{t('home.qualityTitle')}</h4>
+              <p>{t('home.qualityText')}</p>
             </div>
             <div className="reason">
-              <h4>Transparent Pricing</h4>
-              <p>Detailed cost estimates and no hidden fees</p>
+              <h4>{t('home.pricingTitle')}</h4>
+              <p>{t('home.pricingText')}</p>
             </div>
             <div className="reason">
-              <h4>On-Time Delivery</h4>
-              <p>Proven track record of completing projects on schedule</p>
+              <h4>{t('home.deliveryTitle')}</h4>
+              <p>{t('home.deliveryText')}</p>
             </div>
           </div>
         </div>
@@ -168,12 +170,12 @@ export default function Home() {
 
       <section className="cta-section">
         <div className="container">
-          <h2>Ready to Start Your Project?</h2>
-          <p>Contact us today for a free consultation</p>
+          <h2>{t('home.ctaTitle')}</h2>
+          <p>{t('home.ctaText')}</p>
           <div className="cta-buttons">
-            <Link href="/contact" className="btn-primary">Schedule Consultation</Link>
+            <Link href="/contact" className="btn-primary">{t('home.schedule')}</Link>
             <a href="https://wa.me/252638888250" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-              Chat on WhatsApp
+              {t('home.chatWhatsapp')}
             </a>
           </div>
         </div>

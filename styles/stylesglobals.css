@@ -75,6 +75,7 @@ textarea {
 .nav {
   display: flex;
   gap: 1.75rem;
+  align-items: center;
 }
 
 .nav a {
@@ -87,6 +88,46 @@ textarea {
 
 .nav a:hover {
   color: var(--accent-dark);
+}
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.25rem;
+  padding: 0.3rem 0.4rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(44, 50, 64, 0.14);
+  border-radius: 999px;
+}
+
+.language-switcher span {
+  width: 1px;
+  height: 14px;
+  background: var(--border-color);
+}
+
+.language-switcher button {
+  min-width: 31px;
+  padding: 0.2rem 0.35rem;
+  color: var(--muted-text);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.language-switcher button:hover {
+  color: var(--primary-color);
+}
+
+.language-switcher button.active {
+  color: white;
+  background: var(--primary-color);
 }
 
 .menu-toggle {
@@ -112,6 +153,7 @@ textarea {
     -webkit-backdrop-filter: blur(14px);
     padding: 1.25rem 24px;
     gap: 1rem;
+    align-items: flex-start;
   }
 
   .nav.open {
@@ -120,6 +162,10 @@ textarea {
 
   .menu-toggle {
     display: block;
+  }
+
+  .language-switcher {
+    margin: 0.35rem 0 0;
   }
 }
 
