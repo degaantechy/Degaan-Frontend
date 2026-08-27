@@ -174,12 +174,12 @@ textarea {
   position: relative;
   isolation: isolate;
   display: grid;
-  min-height: clamp(520px, 72vh, 760px);
+  min-height: clamp(560px, 78vh, 820px);
   place-items: center;
   overflow: hidden;
   background: #2c3240 url('/videos/home-hero-poster.webp') center / cover no-repeat;
   color: white;
-  padding: 6.5rem 2rem;
+  padding: 7rem 2rem;
   text-align: center;
   border-radius: 0;
 }
@@ -190,8 +190,8 @@ textarea {
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(22, 26, 34, 0.84) 0%, rgba(22, 26, 34, 0.66) 43%, rgba(22, 26, 34, 0.28) 100%),
-    linear-gradient(180deg, rgba(22, 26, 34, 0.14) 0%, rgba(22, 26, 34, 0.36) 100%);
+    linear-gradient(90deg, rgba(22, 26, 34, 0.58) 0%, rgba(22, 26, 34, 0.32) 52%, rgba(22, 26, 34, 0.12) 100%),
+    linear-gradient(180deg, rgba(22, 26, 34, 0.1) 0%, rgba(22, 26, 34, 0.3) 100%);
   pointer-events: none;
 }
 
@@ -203,6 +203,9 @@ textarea {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  opacity: 0.94;
+  filter: brightness(0.9) contrast(1.03) saturate(0.9);
+  transform: scale(1.01);
 }
 
 .hero-content {
@@ -212,19 +215,24 @@ textarea {
 }
 
 .hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  max-width: 780px;
+  margin-bottom: 1.25rem;
+  font-size: clamp(2.9rem, 5vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.04;
   color: white;
-  letter-spacing: -0.04em;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.28);
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.22);
 }
 
 .hero-content p {
   max-width: 680px;
-  margin: 0 0 2rem;
-  font-size: 1.15rem;
-  color: #f2f3f5;
-  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.3);
+  margin: 0 0 2.25rem;
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.9);
+  text-wrap: balance;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.24);
 }
 
 .hero-buttons {
@@ -236,7 +244,8 @@ textarea {
 
 @media (max-width: 768px) {
   .hero-content h1 {
-    font-size: 2rem;
+    max-width: 620px;
+    font-size: clamp(2.2rem, 11vw, 3.25rem);
   }
 
   .hero {
@@ -246,7 +255,9 @@ textarea {
   }
 
   .hero::after {
-    background: linear-gradient(180deg, rgba(22, 26, 34, 0.4) 0%, rgba(22, 26, 34, 0.68) 100%);
+    background:
+      linear-gradient(180deg, rgba(22, 26, 34, 0.2) 0%, rgba(22, 26, 34, 0.48) 100%),
+      linear-gradient(90deg, rgba(22, 26, 34, 0.2), rgba(22, 26, 34, 0.2));
   }
 
   .hero-content {
@@ -259,6 +270,11 @@ textarea {
 
   .hero-buttons {
     justify-content: center;
+  }
+
+  .hero-video {
+    opacity: 0.92;
+    filter: brightness(0.88) contrast(1.03) saturate(0.88);
   }
 }
 
