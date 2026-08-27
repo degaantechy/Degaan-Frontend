@@ -10,21 +10,24 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-section">
-            <Image
-              src="/images/degaan-logo-gold.png"
-              alt="Degaan Real Estate"
-              width={900}
-              height={626}
-              className="footer-brand-logo"
-            />
+            <Link href="/" aria-label={t('header.homeLabel')}>
+              <Image
+                src="/images/degaan-logo-gold.png"
+                alt="Degaan Real Estate"
+                width={900}
+                height={626}
+                className="footer-brand-logo"
+              />
+            </Link>
             <p>{t('footer.summary')}</p>
           </div>
 
           <div className="footer-section">
             <h4>{t('footer.quickLinks')}</h4>
             <ul>
-              <li><Link href="/">{t('header.home')}</Link></li>
-              <li><Link href="/properties">{t('header.properties')}</Link></li>
+              <li><Link href="/developments">{t('header.developments')}</Link></li>
+              <li><Link href="/properties">{t('header.buy')}</Link></li>
+              <li><Link href="/insights">{t('header.insights')}</Link></li>
               <li><Link href="/contact">{t('header.contact')}</Link></li>
             </ul>
           </div>

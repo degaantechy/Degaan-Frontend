@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import { useLanguage } from '../contexts/LanguageContext'
+import { API_BASE_URL } from '../lib/api'
 import { getLocalizedPropertyField, getPropertyStatus, getPropertyType } from '../lib/translations'
 
 export default function PropertyDetail() {
@@ -22,7 +23,7 @@ export default function PropertyDetail() {
   const fetchProperty = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/properties/${id}/`
+        `${API_BASE_URL}/api/properties/${id}/`
       )
       setProperty(response.data)
     } catch (error) {

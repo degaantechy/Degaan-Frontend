@@ -5,6 +5,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import ContactForm from '../components/ContactForm'
 import { useLanguage } from '../contexts/LanguageContext'
+import { API_BASE_URL } from '../lib/api'
 
 export default function Contact() {
   const router = useRouter()
@@ -14,7 +15,7 @@ export default function Contact() {
   const handleSubmit = async (data) => {
     try {
       setLoading(true)
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/leads/`, data)
+      await axios.post(`${API_BASE_URL}/api/leads/`, data)
       toast.success(t('contact.success'))
       router.push('/')
     } catch (error) {
