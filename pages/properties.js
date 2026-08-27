@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropertyCard from '../components/PropertyCard'
 import { useLanguage } from '../contexts/LanguageContext'
+import { API_BASE_URL } from '../lib/api'
 
 export default function Properties() {
   const [properties, setProperties] = useState([])
@@ -29,7 +30,7 @@ export default function Properties() {
       if (filters.status) params.append('status', filters.status)
 
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/properties/?${params.toString()}`
+        `${API_BASE_URL}/api/properties/?${params.toString()}`
       )
       setProperties(response.data.results || [])
     } catch (error) {

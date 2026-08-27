@@ -32,13 +32,10 @@ export default function Header() {
         </button>
 
         <nav id="primary-navigation" className={`nav ${menuOpen ? 'open' : ''}`}>
-          <Link href="/" onClick={() => setMenuOpen(false)}>{t('header.home')}</Link>
-          <Link href="/#projects" onClick={() => setMenuOpen(false)}>{t('header.projects')}</Link>
-          <Link href="/properties" onClick={() => setMenuOpen(false)}>{t('header.properties')}</Link>
+          <Link href="/developments" onClick={() => setMenuOpen(false)}>{t('header.developments')}</Link>
+          <Link href="/properties" onClick={() => setMenuOpen(false)}>{t('header.buy')}</Link>
+          <Link href="/insights" onClick={() => setMenuOpen(false)}>{t('header.insights')}</Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>{t('header.contact')}</Link>
-          <a href="https://wa.me/252638888250" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
-            {t('header.whatsapp')}
-          </a>
           <div className="language-switcher" role="group" aria-label={t('language.label')}>
             <button
               type="button"

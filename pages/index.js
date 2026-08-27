@@ -7,6 +7,7 @@ import PropertyCard from '../components/PropertyCard'
 import Hero from '../components/Hero'
 import ContactForm from '../components/ContactForm'
 import { useLanguage } from '../contexts/LanguageContext'
+import { API_BASE_URL } from '../lib/api'
 
 export default function Home() {
   const [properties, setProperties] = useState([])
@@ -20,7 +21,7 @@ export default function Home() {
   const fetchProperties = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/properties/?limit=6`
+        `${API_BASE_URL}/api/properties/?limit=6`
       )
       setProperties(response.data.results || [])
     } catch (error) {
