@@ -103,7 +103,8 @@ textarea {
   align-items: center;
 }
 
-.nav a {
+.nav > a,
+.contact-menu-toggle {
   text-decoration: none;
   color: var(--primary-color);
   font-size: 0.95rem;
@@ -111,13 +112,103 @@ textarea {
   transition: color 0.2s;
 }
 
-.nav a:hover {
+.nav > a:hover,
+.contact-menu-toggle:hover {
   color: var(--accent-dark);
 }
 
-.nav .nav-contact {
+.contact-menu {
+  position: relative;
+}
+
+.contact-menu-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.6rem 1rem;
+  background: transparent;
   border: 1px solid rgba(44, 50, 64, 0.3);
+  cursor: pointer;
+}
+
+.contact-caret {
+  display: inline-block;
+  color: var(--accent-dark);
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.contact-menu.open .contact-caret {
+  transform: rotate(180deg);
+}
+
+.contact-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  display: grid;
+  width: 290px;
+  padding: 0.45rem;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(44, 50, 64, 0.12);
+  box-shadow: 0 18px 45px rgba(32, 37, 48, 0.16);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.contact-menu.open .contact-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.contact-dropdown a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0.85rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.contact-dropdown a + a {
+  border-top: 1px solid var(--border-color);
+}
+
+.contact-dropdown a:hover,
+.contact-dropdown a:focus-visible {
+  color: var(--primary-color);
+  background: var(--soft-navy);
+}
+
+.contact-dropdown strong,
+.contact-dropdown small {
+  display: block;
+}
+
+.contact-dropdown strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.contact-dropdown small {
+  margin-top: 0.2rem;
+  color: var(--muted-text);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.contact-option-arrow {
+  flex: 0 0 auto;
+  color: var(--accent-dark);
+  font-size: 1rem;
 }
 
 .language-switcher {
@@ -218,16 +309,45 @@ textarea {
     align-items: stretch;
   }
 
-  .nav > a {
+  .nav > a,
+  .contact-menu {
     width: 100%;
-    padding: 0.9rem 0;
     border-bottom: 1px solid rgba(44, 50, 64, 0.08);
   }
 
-  .nav .nav-contact {
+  .nav > a {
+    padding: 0.9rem 0;
+  }
+
+  .contact-menu-toggle {
+    justify-content: space-between;
+    width: 100%;
     padding: 0.9rem 0;
     border: 0;
-    border-bottom: 1px solid rgba(44, 50, 64, 0.08);
+  }
+
+  .contact-dropdown {
+    position: static;
+    display: none;
+    width: 100%;
+    margin: 0 0 0.75rem;
+    padding: 0 0 0 0.75rem;
+    background: transparent;
+    border: 0;
+    border-left: 2px solid var(--accent-color);
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .contact-menu.open .contact-dropdown {
+    display: grid;
+  }
+
+  .contact-dropdown a {
+    padding: 0.85rem 1rem;
   }
 
   .nav.open {
