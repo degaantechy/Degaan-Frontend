@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 
+import DevelopmentCard from '../components/DevelopmentCard'
 import { useLanguage } from '../contexts/LanguageContext'
+import { developments } from '../lib/developments'
 
 export default function Developments() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
 
   return (
     <>
@@ -25,37 +25,18 @@ export default function Developments() {
 
       <section className="projects-showcase developments-listing">
         <div className="container">
-          <article className="portfolio-feature">
-            <Link href="/projects/sareedo-court" className="portfolio-image-link" aria-label={t('home.sareedoLabel')}>
-              <Image
-                src="/images/projects/sareedo-court/residence.webp"
-                alt={t('home.sareedoAlt')}
-                width={1448}
-                height={1086}
-                className="portfolio-image"
-                sizes="(max-width: 900px) 100vw, 58vw"
-                priority
+          <div className="developments-grid">
+            {developments.map((project, index) => (
+              <DevelopmentCard
+                key={project.slug}
+                project={project}
+                index={index}
+                language={language}
+                priority={index < 2}
               />
-            </Link>
-
-            <div className="portfolio-copy">
-              <div className="portfolio-status-row">
-                <span className="portfolio-number">01</span>
-                <span className="project-status">{t('home.upcoming')}</span>
-              </div>
-              <p className="portfolio-location">{t('home.sareedoLocation')}</p>
-              <h2>Sareedo Court</h2>
-              <p className="portfolio-summary">{t('home.sareedoSummary')}</p>
-              <dl className="portfolio-meta">
-                <div><dt>{t('home.plot')}</dt><dd>12 × 24 m</dd></div>
-                <div><dt>{t('home.from')}</dt><dd>USD 63.4K</dd></div>
-                <div><dt>{t('home.completion')}</dt><dd>{t('home.completionDate')}</dd></div>
-              </dl>
-              <Link href="/projects/sareedo-court" className="project-link">
-                {t('home.exploreSareedo')} <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </article>
+            ))}
+          </div>
+          <p className="concept-note">{t('home.conceptNote')}</p>
         </div>
       </section>
     </>
