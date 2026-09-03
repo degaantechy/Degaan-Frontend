@@ -19,6 +19,10 @@ export default function Header() {
             className="brand-logo-image"
             priority
           />
+          <span className="brand-logo-text" aria-hidden="true">
+            <strong>Degaan</strong>
+            <small>Real Estate</small>
+          </span>
         </Link>
 
         <button
@@ -28,14 +32,18 @@ export default function Header() {
           aria-expanded={menuOpen}
           aria-controls="primary-navigation"
         >
-          ☰
+          <span aria-hidden="true" className="menu-icon">
+            <span />
+            <span />
+          </span>
+          <span className="sr-only">{menuOpen ? t('header.closeMenu') : t('header.openMenu')}</span>
         </button>
 
         <nav id="primary-navigation" className={`nav ${menuOpen ? 'open' : ''}`}>
           <Link href="/developments" onClick={() => setMenuOpen(false)}>{t('header.developments')}</Link>
           <Link href="/properties" onClick={() => setMenuOpen(false)}>{t('header.buy')}</Link>
           <Link href="/insights" onClick={() => setMenuOpen(false)}>{t('header.insights')}</Link>
-          <Link href="/contact" onClick={() => setMenuOpen(false)}>{t('header.contact')}</Link>
+          <Link href="/contact" className="nav-contact" onClick={() => setMenuOpen(false)}>{t('header.contact')}</Link>
           <div className="language-switcher" role="group" aria-label={t('language.label')}>
             <button
               type="button"

@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropertyCard from '../components/PropertyCard'
+import DevelopmentCard from '../components/DevelopmentCard'
 import Hero from '../components/Hero'
-import ContactForm from '../components/ContactForm'
 import { useLanguage } from '../contexts/LanguageContext'
 import { API_BASE_URL } from '../lib/api'
+import { developments } from '../lib/developments'
 
 export default function Home() {
   const [properties, setProperties] = useState([])
@@ -65,7 +65,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="projects-showcase" id="projects">
+      <section className="projects-showcase" id="developments">
         <div className="container">
           <div className="section-heading section-heading-split">
             <div>
@@ -77,49 +77,19 @@ export default function Home() {
             </p>
           </div>
 
-          <article className="portfolio-feature">
-            <Link href="/projects/sareedo-court" className="portfolio-image-link" aria-label={t('home.sareedoLabel')}>
-              <Image
-                src="/images/projects/sareedo-court/residence.webp"
-                alt={t('home.sareedoAlt')}
-                width={1448}
-                height={1086}
-                className="portfolio-image"
-                sizes="(max-width: 900px) 100vw, 58vw"
+          <div className="developments-grid">
+            {developments.map((project, index) => (
+              <DevelopmentCard
+                key={project.slug}
+                project={project}
+                index={index}
+                language={language}
+                priority={index < 2}
               />
-            </Link>
+            ))}
+          </div>
 
-            <div className="portfolio-copy">
-              <div className="portfolio-status-row">
-                <span className="portfolio-number">01</span>
-                <span className="project-status">{t('home.upcoming')}</span>
-              </div>
-              <p className="portfolio-location">{t('home.sareedoLocation')}</p>
-              <h3>Sareedo Court</h3>
-              <p className="portfolio-summary">
-                {t('home.sareedoSummary')}
-              </p>
-
-              <dl className="portfolio-meta">
-                <div>
-                  <dt>{t('home.plot')}</dt>
-                  <dd>12 × 24 m</dd>
-                </div>
-                <div>
-                  <dt>{t('home.from')}</dt>
-                  <dd>USD 63.4K</dd>
-                </div>
-                <div>
-                  <dt>{t('home.completion')}</dt>
-                  <dd>{t('home.completionDate')}</dd>
-                </div>
-              </dl>
-
-              <Link href="/projects/sareedo-court" className="project-link">
-                {t('home.exploreSareedo')} <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </article>
+          <p className="concept-note">{t('home.conceptNote')}</p>
         </div>
       </section>
 
