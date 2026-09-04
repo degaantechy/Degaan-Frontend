@@ -3,6 +3,7 @@ import { useMemo, useRef, useState } from 'react'
 
 import { useLanguage } from '../contexts/LanguageContext'
 import { API_BASE_URL } from '../lib/api'
+import { trackAnalyticsEvent } from '../lib/analytics'
 import { calculateConstructionEstimate } from '../lib/constructionEstimator.mjs'
 
 const COPY = {
@@ -61,6 +62,8 @@ const COPY = {
     management: 'Include project-management service',
     reviewTitle: 'Your preliminary construction estimate',
     reviewIntro: 'Review the quantities and estimated cost before sending the project to Degaan.',
+    finishStandardTitle: 'High-standard finishing estimate',
+    finishStandardText: 'This calculator is based on high-standard finishing. Basic finishing starts from USD 180/m², subject to the approved design, materials and site conditions.',
     preliminary: 'Preliminary estimate',
     plotArea: 'Plot area',
     buildingArea: 'Total building area',
@@ -81,7 +84,7 @@ const COPY = {
     estimateNote: 'This is an indicative estimate, not a contract quotation. Final cost requires drawings, specifications, a site visit, soil review and confirmation of quantities. The 10% plumbing and electrical allowance is calculated on measured construction and external works.',
     yourDetails: 'Send this estimate to Degaan',
     name: 'Full name',
-    phone: 'Phone / WhatsApp',
+    phone: 'WhatsApp number',
     email: 'Email address',
     namePlaceholder: 'Your name',
     phonePlaceholder: '+252…',
@@ -100,6 +103,8 @@ const COPY = {
     requiredUpper: 'Enter a valid upper-floor area that does not exceed the plot area.',
     outdoorTooLarge: 'Landscaping and paving cannot exceed the open plot area.',
     contactRequired: 'Enter your name, phone number and a valid email address.',
+    contactUnlock: 'Complete your name, WhatsApp number and email to unlock quotation submission, WhatsApp and PDF/print.',
+    contactReady: 'Your contact details are complete. All quotation actions are available.',
     liveTitle: 'Estimate summary',
     liveHint: 'Your estimate updates as you make selections.',
     notIncluded: 'Not selected',
@@ -161,6 +166,8 @@ const COPY = {
     management: 'Ku dar adeegga maamulka mashruuca',
     reviewTitle: 'Qiyaasta hordhaca ah ee dhismahaaga',
     reviewIntro: 'Hubi cabbirrada iyo qiimaha ka hor inta aan mashruuca loo dirin Degaan.',
+    finishStandardTitle: 'Qiyaas dhammaystir tayo sare leh',
+    finishStandardText: 'Xisaabiyahani wuxuu ku salaysan yahay dhammaystir tayo sare leh. Dhammaystirka aasaasiga ahi wuxuu ka bilaabmaa USD 180/m², iyadoo lagu salaynayo naqshadda la ansixiyey, agabka iyo xaaladda goobta.',
     preliminary: 'Qiyaas hordhac ah',
     plotArea: 'Bedka dhulka',
     buildingArea: 'Wadarta bedka dhismaha',
@@ -181,7 +188,7 @@ const COPY = {
     estimateNote: 'Tani waa qiyaas hordhac ah, mana aha qiime qandaraas. Qiimaha kama dambaysta ahi wuxuu u baahan yahay naqshado, qeexitaan, booqasho goobta, hubinta ciidda iyo xaqiijinta cabbirrada. Qiyaasta 10% ee tuubooyinka iyo korontada waxaa laga xisaabiyey shaqada dhismaha iyo bannaanka.',
     yourDetails: 'U dir qiimayntan Degaan',
     name: 'Magaca oo buuxa',
-    phone: 'Telefoon / WhatsApp',
+    phone: 'Lambarka WhatsApp-ka',
     email: 'Cinwaanka iimaylka',
     namePlaceholder: 'Magacaaga',
     phonePlaceholder: '+252…',
@@ -200,6 +207,8 @@ const COPY = {
     requiredUpper: 'Geli bed sax ah oo dabaqa sare ah kana yar bedka dhulka.',
     outdoorTooLarge: 'Bedka beerista iyo sagxaddu kama badnaan karaan bannaanka dhulka.',
     contactRequired: 'Geli magaca, telefoonka iyo cinwaan iimayl oo sax ah.',
+    contactUnlock: 'Buuxi magacaaga, lambarka WhatsApp-ka iyo iimaylka si aad u furto dirista qiimaynta, WhatsApp-ka iyo PDF/daabacaadda.',
+    contactReady: 'Faahfaahinta xidhiidhka waa dhammaystiran tahay. Dhammaan adeegyada qiimayntu way furan yihiin.',
     liveTitle: 'Soo koobidda qiimaynta',
     liveHint: 'Qiimuhu wuu is beddelayaa marka aad wax doorato.',
     notIncluded: 'Lama dooran',
@@ -297,6 +306,11 @@ export default function ConstructionEstimator() {
   const estimate = useMemo(
     () => calculateConstructionEstimate(values),
     [values]
+  )
+  const contactComplete = Boolean(
+    contact.name.trim().length >= 2
+    && contact.phone.replace(/\D/g, '').length >= 7
+    && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email.trim())
   )
 
   const setValue = (key, value) => {
@@ -429,6 +443,11 @@ export default function ConstructionEstimator() {
         email: contact.email.trim(),
         interest_type: 'construction',
         message: summaryMessage,
+      })
+      trackAnalyticsEvent('generate_lead', {
+        form_name: 'construction_estimator',
+        currency: 'USD',
+        value: Math.round(estimate.estimatedTotal),
       })
       setSubmitState('sent')
     } catch (submissionError) {
@@ -660,6 +679,11 @@ export default function ConstructionEstimator() {
               <h2>{c.reviewTitle}</h2>
               <p className="estimator-intro">{c.reviewIntro}</p>
 
+              <div className="estimate-finish-standard">
+                <strong>{c.finishStandardTitle}</strong>
+                <p>{c.finishStandardText}</p>
+              </div>
+
               <div className="estimate-project-facts">
                 <div><span>{c.plotArea}</span><strong>{number.format(estimate.plotArea)} m²</strong></div>
                 <div><span>{c.buildingArea}</span><strong>{number.format(estimate.totalBuildingArea)} m²</strong></div>
@@ -681,27 +705,51 @@ export default function ConstructionEstimator() {
                 <div className="estimator-fields-grid">
                   <label className="estimator-field">
                     <span>{c.name}</span>
-                    <input type="text" value={contact.name} placeholder={c.namePlaceholder} onChange={(event) => setContact((current) => ({ ...current, name: event.target.value }))} />
+                    <input type="text" value={contact.name} placeholder={c.namePlaceholder} autoComplete="name" required minLength="2" onChange={(event) => setContact((current) => ({ ...current, name: event.target.value }))} />
                   </label>
                   <label className="estimator-field">
                     <span>{c.phone}</span>
-                    <input type="tel" value={contact.phone} placeholder={c.phonePlaceholder} onChange={(event) => setContact((current) => ({ ...current, phone: event.target.value }))} />
+                    <input type="tel" value={contact.phone} placeholder={c.phonePlaceholder} autoComplete="tel" required minLength="7" onChange={(event) => setContact((current) => ({ ...current, phone: event.target.value }))} />
                   </label>
                   <label className="estimator-field full">
                     <span>{c.email}</span>
-                    <input type="email" value={contact.email} placeholder={c.emailPlaceholder} onChange={(event) => setContact((current) => ({ ...current, email: event.target.value }))} />
+                    <input type="email" value={contact.email} placeholder={c.emailPlaceholder} autoComplete="email" required onChange={(event) => setContact((current) => ({ ...current, email: event.target.value }))} />
                   </label>
                 </div>
 
                 {submitState === 'sent' && <p className="estimate-status success" role="status">{c.sent}</p>}
                 {submitState === 'error' && <p className="estimate-status error" role="alert">{c.sendError}</p>}
 
+                <p className={`estimate-unlock-hint ${contactComplete ? 'ready' : ''}`} aria-live="polite">
+                  {contactComplete ? c.contactReady : c.contactUnlock}
+                </p>
+
                 <div className="estimate-actions">
-                  <button className="btn-primary" type="submit" disabled={submitState === 'submitting'}>
+                  <button className="btn-primary" type="submit" disabled={!contactComplete || submitState === 'submitting'}>
                     {submitState === 'submitting' ? c.submitting : c.submit}
                   </button>
-                  <a className="btn-secondary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">{c.whatsapp}</a>
-                  <button className="estimator-print" type="button" onClick={() => window.print()}>{c.print}</button>
+                  <button
+                    className="btn-secondary"
+                    type="button"
+                    disabled={!contactComplete}
+                    onClick={() => {
+                      trackAnalyticsEvent('construction_quote_whatsapp', { form_name: 'construction_estimator' })
+                      window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
+                    }}
+                  >
+                    {c.whatsapp}
+                  </button>
+                  <button
+                    className="estimator-print"
+                    type="button"
+                    disabled={!contactComplete}
+                    onClick={() => {
+                      trackAnalyticsEvent('construction_quote_print', { form_name: 'construction_estimator' })
+                      window.print()
+                    }}
+                  >
+                    {c.print}
+                  </button>
                 </div>
               </form>
             </div>
@@ -732,6 +780,10 @@ export default function ConstructionEstimator() {
           <div className="estimator-summary-total">
             <span>{c.total}</span>
             <strong>{money.format(estimate.estimatedTotal)}</strong>
+          </div>
+          <div className="estimator-finish-summary">
+            <strong>{c.finishStandardTitle}</strong>
+            <span>{c.finishStandardText}</span>
           </div>
         </aside>
       </div>

@@ -2959,6 +2959,30 @@ textarea:focus-visible {
   line-height: 1.6;
 }
 
+.estimate-finish-standard {
+  margin-bottom: 1.35rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(205, 153, 51, 0.38);
+  border-radius: 8px;
+  background: #fbf7ee;
+}
+
+.estimate-finish-standard strong,
+.estimator-finish-summary strong {
+  display: block;
+  color: var(--primary-color);
+  font-size: 0.82rem;
+}
+
+.estimate-finish-standard p,
+.estimator-finish-summary span {
+  display: block;
+  margin: 0.35rem 0 0;
+  color: var(--muted-text);
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
 .estimate-contact {
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
@@ -2974,6 +2998,28 @@ textarea:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
+}
+
+.estimate-unlock-hint {
+  margin: 0 0 1rem;
+  color: var(--muted-text);
+  font-size: 0.73rem;
+  line-height: 1.55;
+}
+
+.estimate-unlock-hint.ready {
+  color: #2f6b43;
+}
+
+.estimator-print:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.estimator-finish-summary {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .estimate-status {

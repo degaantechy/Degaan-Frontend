@@ -23,6 +23,7 @@ Create `.env.local`:
 
 ```
 NEXT_PUBLIC_API_URL=https://api.degaanrealestate.com
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
 ## Development
@@ -44,7 +45,7 @@ npm start
 
 1. Push this code to GitHub
 2. Connect repository on Railway
-3. Set environment variable: `NEXT_PUBLIC_API_URL`
+3. Set environment variables: `NEXT_PUBLIC_API_URL` and `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 4. Railway auto-detects Node.js and deploys
 
 ## Project Structure
@@ -59,6 +60,8 @@ public/             - Static files
 ## Connecting to Backend
 
 Frontend calls backend API at `NEXT_PUBLIC_API_URL`
+
+Google Analytics 4 loads when `NEXT_PUBLIC_GA_MEASUREMENT_ID` contains a valid web-stream ID beginning with `G-`. Keep Enhanced Measurement enabled in the GA4 web stream so client-side page changes are counted. The estimator also records quotation submissions, WhatsApp quotation clicks and PDF/print actions without sending names, phone numbers or email addresses to Analytics.
 
 Endpoints:
 - `GET /api/properties/` - List properties

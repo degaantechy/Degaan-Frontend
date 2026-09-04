@@ -1,6 +1,7 @@
 import '../styles/stylesglobals.css'
 import Head from 'next/head'
 import Layout from '../components/Layout'
+import GoogleAnalytics from '../components/GoogleAnalytics'
 import { Montserrat } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 import { LanguageProvider } from '../contexts/LanguageContext'
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
           <ToastContainer position="bottom-right" />
         </Layout>
+        <GoogleAnalytics />
       </div>
     </LanguageProvider>
   )
