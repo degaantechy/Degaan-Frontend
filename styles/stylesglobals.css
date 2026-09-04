@@ -2885,22 +2885,6 @@ textarea:focus-visible {
   line-height: 1.15;
 }
 
-.estimator-summary > small {
-  color: var(--muted-text);
-  font-size: 0.66rem;
-}
-
-.estimator-rate-note {
-  margin-top: 0.45rem;
-  color: var(--muted-text);
-  font-size: 0.7rem;
-}
-
-.estimator-rate-note span {
-  color: var(--primary-color);
-  font-weight: 700;
-}
-
 .estimate-project-facts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

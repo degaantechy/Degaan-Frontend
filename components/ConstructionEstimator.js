@@ -3,10 +3,7 @@ import { useMemo, useRef, useState } from 'react'
 
 import { useLanguage } from '../contexts/LanguageContext'
 import { API_BASE_URL } from '../lib/api'
-import {
-  CONSTRUCTION_RATES,
-  calculateConstructionEstimate,
-} from '../lib/constructionEstimator.mjs'
+import { calculateConstructionEstimate } from '../lib/constructionEstimator.mjs'
 
 const COPY = {
   en: {
@@ -19,9 +16,9 @@ const COPY = {
     commercial: 'Commercial building',
     structure: 'Structural system',
     masonry: 'One-floor masonry',
-    masonryHelp: 'Load-bearing masonry · USD 190/m²',
+    masonryHelp: 'Load-bearing masonry for a single-floor home',
     rcc: 'RCC framed structure',
-    rccHelp: 'Ground floor USD 450/m² · upper floors USD 350/m²',
+    rccHelp: 'Reinforced concrete frame for one or more floors',
     floors: 'Number of floors',
     floorsHelp: 'Choose 1 for ground floor only, 2 for G+1, and so on.',
     plotTitle: 'Tell us about your plot',
@@ -60,8 +57,8 @@ const COPY = {
     standardGates: 'Standard gates',
     premiumGates: 'Premium gates',
     gateWidth: 'Average opening width per gate',
-    design: 'Include USD 2,500 design service',
-    management: 'Include USD 2,500 project-management service',
+    design: 'Include design service',
+    management: 'Include project-management service',
     reviewTitle: 'Your preliminary construction estimate',
     reviewIntro: 'Review the quantities and estimated cost before sending the project to Degaan.',
     preliminary: 'Preliminary estimate',
@@ -108,7 +105,6 @@ const COPY = {
     notIncluded: 'Not selected',
     yes: 'Yes',
     no: 'No',
-    rateBasis: 'Current Degaan planning rates · USD',
   },
   so: {
     steps: ['Mashruuca', 'Dhulka', 'Dhismaha', 'Shaqada bannaanka', 'Qiimaynta'],
@@ -120,9 +116,9 @@ const COPY = {
     commercial: 'Dhisme ganacsi',
     structure: 'Qaab-dhismeedka',
     masonry: 'Masonry hal dabaq ah',
-    masonryHelp: 'Masonry culays qaada · USD 190/m²',
+    masonryHelp: 'Masonry culays qaada oo loogu talagalay guri hal dabaq ah',
     rcc: 'Qaab-dhismeed RCC ah',
-    rccHelp: 'Dabaqa hoose USD 450/m² · dabaqyada sare USD 350/m²',
+    rccHelp: 'Qaab shub RCC ah oo loogu talagalay hal dabaq ama dabaqyo badan',
     floors: 'Tirada dabaqyada',
     floorsHelp: 'Dooro 1 haddii uu yahay dabaqa hoose oo keliya, 2 haddii uu yahay G+1, iyo wixii la mid ah.',
     plotTitle: 'Faahfaahinta dhulka',
@@ -161,8 +157,8 @@ const COPY = {
     standardGates: 'Albaabbada caadiga ah',
     premiumGates: 'Albaabbada tayada sare leh',
     gateWidth: 'Celceliska ballaca albaab kasta',
-    design: 'Ku dar adeegga naqshadda ee USD 2,500',
-    management: 'Ku dar maamulka mashruuca ee USD 2,500',
+    design: 'Ku dar adeegga naqshadda',
+    management: 'Ku dar adeegga maamulka mashruuca',
     reviewTitle: 'Qiyaasta hordhaca ah ee dhismahaaga',
     reviewIntro: 'Hubi cabbirrada iyo qiimaha ka hor inta aan mashruuca loo dirin Degaan.',
     preliminary: 'Qiyaas hordhac ah',
@@ -209,7 +205,6 @@ const COPY = {
     notIncluded: 'Lama dooran',
     yes: 'Haa',
     no: 'Maya',
-    rateBasis: 'Qiimayaasha qorshaynta ee Degaan · USD',
   },
 }
 
@@ -737,11 +732,6 @@ export default function ConstructionEstimator() {
           <div className="estimator-summary-total">
             <span>{c.total}</span>
             <strong>{money.format(estimate.estimatedTotal)}</strong>
-          </div>
-          <small>{c.rateBasis}</small>
-          <div className="estimator-rate-note">
-            <span>{values.structure === 'masonry' ? money.format(CONSTRUCTION_RATES.masonryGround) : money.format(CONSTRUCTION_RATES.rccGround)}</span>
-            /m²
           </div>
         </aside>
       </div>
