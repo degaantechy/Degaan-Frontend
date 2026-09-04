@@ -49,7 +49,7 @@ export default function Home() {
             <div className="service-card">
               <h3>{t('home.constructionTitle')}</h3>
               <p>{t('home.constructionText')}</p>
-              <Link href="/contact?service=construction">{t('home.quote')}</Link>
+              <Link href="/construction-estimator">{t('home.quote')}</Link>
             </div>
             <div className="service-card">
               <h3>{t('home.buySellTitle')}</h3>

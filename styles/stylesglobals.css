@@ -2338,3 +2338,803 @@ textarea:focus-visible {
     line-height: 1.82;
   }
 }
+
+/* Construction cost estimator */
+.estimator-page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
+  color: white;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(205, 153, 51, 0.22), transparent 28%),
+    linear-gradient(135deg, #202530 0%, #2c3240 58%, #373f50 100%);
+}
+
+.estimator-page-hero::after {
+  content: '';
+  position: absolute;
+  right: -8rem;
+  bottom: -14rem;
+  width: 34rem;
+  height: 34rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4rem rgba(255, 255, 255, 0.025), 0 0 0 9rem rgba(255, 255, 255, 0.02);
+}
+
+.estimator-page-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.estimator-page-hero .section-kicker {
+  color: #e0b865;
+}
+
+.estimator-page-hero h1 {
+  max-width: 820px;
+  margin: 0 0 1rem;
+  color: white;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.estimator-page-hero p:last-child {
+  max-width: 680px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.estimator-page-content {
+  padding-top: clamp(2rem, 5vw, 4.5rem);
+  padding-bottom: clamp(4rem, 8vw, 8rem);
+}
+
+.estimator-shell {
+  scroll-margin-top: calc(var(--header-height) + 18px);
+}
+
+.estimator-progress {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 1.5rem;
+  padding: 1.15rem 1.4rem;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.estimator-progress-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #8a909b;
+}
+
+.estimator-progress-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: 0.75rem;
+  width: calc(100% - 3.5rem);
+  height: 1px;
+  background: #dfe1e5;
+}
+
+.estimator-progress-step > span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid #cfd2d8;
+  border-radius: 50%;
+  background: white;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.estimator-progress-step small {
+  position: relative;
+  z-index: 1;
+  padding-right: 0.6rem;
+  background: rgba(255, 255, 255, 0.96);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.estimator-progress-step.active,
+.estimator-progress-step.complete {
+  color: var(--primary-color);
+}
+
+.estimator-progress-step.active > span {
+  color: white;
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+}
+
+.estimator-progress-step.complete > span {
+  color: #fff;
+  border-color: var(--accent-dark);
+  background: var(--accent-dark);
+}
+
+.estimator-progress-step.complete::after {
+  background: rgba(138, 97, 19, 0.42);
+}
+
+.estimator-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.estimator-panel,
+.estimator-summary {
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.estimator-panel {
+  min-height: 630px;
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+}
+
+.estimator-step > h2 {
+  max-width: 680px;
+  margin: 0.45rem 0 0.85rem;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.18;
+}
+
+.estimator-intro {
+  max-width: 680px;
+  margin-bottom: 2.25rem;
+  color: var(--muted-text);
+}
+
+.estimator-fieldset {
+  min-width: 0;
+  margin: 0 0 2.25rem;
+  padding: 0;
+  border: 0;
+}
+
+.estimator-fieldset legend,
+.estimator-field-block > .estimator-field > span:first-child {
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.estimator-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.estimator-choice-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.estimator-choice {
+  position: relative;
+  display: flex;
+  min-height: 116px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.2rem 2.75rem 1.2rem 1.2rem;
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
+  background: #fbfbfa;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+.estimator-choice:hover {
+  border-color: rgba(138, 97, 19, 0.55);
+  transform: translateY(-1px);
+}
+
+.estimator-choice.selected {
+  border-color: var(--accent-dark);
+  background: #fbf7ee;
+}
+
+.estimator-choice strong,
+.estimator-choice small {
+  display: block;
+}
+
+.estimator-choice strong {
+  font-size: 0.94rem;
+}
+
+.estimator-choice small {
+  margin-top: 0.35rem;
+  color: var(--muted-text);
+  font-size: 0.73rem;
+  line-height: 1.45;
+}
+
+.estimator-choice-check {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  width: 23px;
+  height: 23px;
+  place-items: center;
+  color: white;
+  border: 1px solid #cfd2d8;
+  border-radius: 50%;
+  background: white;
+  font-size: 0.72rem;
+}
+
+.estimator-choice.selected .estimator-choice-check {
+  border-color: var(--accent-dark);
+  background: var(--accent-dark);
+}
+
+.estimator-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+}
+
+.estimator-fields-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 0;
+}
+
+.estimator-field {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+}
+
+.estimator-field.full {
+  grid-column: 1 / -1;
+  margin-bottom: 1rem;
+}
+
+.estimator-field > span:first-child {
+  color: var(--primary-color);
+  font-size: 0.79rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.estimator-field input {
+  width: 100%;
+  min-height: 50px;
+  padding: 0.8rem 0.9rem;
+  color: var(--primary-color);
+  border: 1px solid #d8dadd;
+  border-radius: 0;
+  background: white;
+}
+
+.estimator-field input:focus {
+  border-color: var(--accent-dark);
+  outline: 3px solid rgba(205, 153, 51, 0.14);
+}
+
+.estimator-input-wrap {
+  position: relative;
+  display: block;
+}
+
+.estimator-input-wrap input {
+  padding-right: 4.6rem;
+}
+
+.estimator-input-wrap small {
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  color: var(--muted-text);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.estimator-field-block {
+  max-width: 330px;
+  margin-bottom: 2rem;
+}
+
+.estimator-help {
+  margin: 0.55rem 0 0.9rem;
+  color: var(--muted-text);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.road-selector {
+  display: grid;
+  grid-template-areas:
+    '. front .'
+    'left plot right'
+    '. rear .';
+  grid-template-columns: 105px minmax(150px, 230px) 105px;
+  gap: 0.55rem;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.road-selector > button {
+  min-height: 48px;
+  padding: 0.55rem;
+  color: var(--muted-text);
+  border: 1px dashed #c6c9cf;
+  background: #fbfbfa;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.road-selector > button:nth-child(1) { grid-area: front; }
+.road-selector > button:nth-child(2) { grid-area: rear; }
+.road-selector > button:nth-child(3) { grid-area: left; }
+.road-selector > button:nth-child(4) { grid-area: right; }
+
+.road-selector > button.selected {
+  color: var(--primary-color);
+  border-style: solid;
+  border-color: var(--accent-dark);
+  background: #fbf7ee;
+}
+
+.road-selector > button span {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  margin-right: 0.25rem;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.65rem;
+}
+
+.road-plot {
+  grid-area: plot;
+  display: grid;
+  min-height: 138px;
+  place-items: center;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  background:
+    linear-gradient(rgba(44, 50, 64, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(44, 50, 64, 0.035) 1px, transparent 1px),
+    #fff;
+  background-size: 16px 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.estimator-toggles {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.estimator-toggle {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  background: #fbfbfa;
+  cursor: pointer;
+}
+
+.estimator-toggle input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.estimator-toggle > span {
+  display: block;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 20px;
+  padding: 3px;
+  border-radius: 999px;
+  background: #c9ccd2;
+  transition: background-color 0.2s;
+}
+
+.estimator-toggle > span::after {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.2s;
+}
+
+.estimator-toggle input:checked + span {
+  background: var(--accent-dark);
+}
+
+.estimator-toggle input:checked + span::after {
+  transform: translateX(16px);
+}
+
+.estimator-toggle input:focus-visible + span {
+  outline: 3px solid rgba(205, 153, 51, 0.3);
+  outline-offset: 3px;
+}
+
+.estimator-toggle strong {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.estimator-error {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  color: #8a251d;
+  border-left: 3px solid var(--error-color);
+  background: #fff0ef;
+  font-size: 0.83rem;
+}
+
+.estimator-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.estimator-back,
+.estimator-print {
+  padding: 0.75rem 0;
+  color: var(--primary-color);
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.estimator-summary {
+  position: sticky;
+  top: calc(var(--header-height) + 1.5rem);
+  padding: 1.6rem;
+}
+
+.estimator-summary h2 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.estimator-summary > p:not(.section-kicker) {
+  color: var(--muted-text);
+  font-size: 0.76rem;
+}
+
+.estimator-summary dl {
+  margin: 1.4rem 0;
+}
+
+.estimator-summary dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.62rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.76rem;
+}
+
+.estimator-summary dt {
+  color: var(--muted-text);
+}
+
+.estimator-summary dd {
+  max-width: 54%;
+  margin: 0;
+  font-weight: 700;
+  text-align: right;
+}
+
+.estimator-summary-total {
+  margin: 1.25rem -1.6rem 1rem;
+  padding: 1.25rem 1.6rem;
+  color: white;
+  background: var(--primary-color);
+}
+
+.estimator-summary-total span,
+.estimator-summary-total strong {
+  display: block;
+}
+
+.estimator-summary-total span {
+  margin-bottom: 0.25rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.estimator-summary-total strong {
+  color: #e5bd69;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.estimator-summary > small {
+  color: var(--muted-text);
+  font-size: 0.66rem;
+}
+
+.estimator-rate-note {
+  margin-top: 0.45rem;
+  color: var(--muted-text);
+  font-size: 0.7rem;
+}
+
+.estimator-rate-note span {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.estimate-project-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 2rem;
+  border-top: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+}
+
+.estimate-project-facts > div {
+  padding: 1rem;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.estimate-project-facts span,
+.estimate-project-facts strong {
+  display: block;
+}
+
+.estimate-project-facts span {
+  margin-bottom: 0.25rem;
+  color: var(--muted-text);
+  font-size: 0.7rem;
+}
+
+.estimate-project-facts strong {
+  font-size: 0.84rem;
+}
+
+.estimate-cost-table {
+  border-top: 1px solid var(--border-color);
+}
+
+.estimate-cost-table > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.82rem;
+}
+
+.estimate-cost-table > div span {
+  color: var(--muted-text);
+}
+
+.estimate-cost-table .estimate-total {
+  margin-top: 0.5rem;
+  padding: 1.15rem 0;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  font-size: 1rem;
+}
+
+.estimate-cost-table .estimate-total span {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.estimate-cost-table .estimate-total strong {
+  color: var(--accent-dark);
+  font-size: 1.25rem;
+}
+
+.estimate-disclaimer {
+  margin: 1.25rem 0 2.25rem;
+  padding: 1rem;
+  color: var(--muted-text);
+  border-left: 3px solid var(--accent-color);
+  background: #fbf7ee;
+  font-size: 0.73rem;
+  line-height: 1.6;
+}
+
+.estimate-contact {
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.estimate-contact h3 {
+  margin-bottom: 1.25rem;
+  font-size: 1.12rem;
+}
+
+.estimate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.estimate-status {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 960px) {
+  .estimator-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .estimator-summary {
+    position: static;
+    grid-row: 1;
+  }
+
+  .estimator-summary dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .estimator-page-hero {
+    padding: 4rem 0 3.25rem;
+  }
+
+  .estimator-page-hero h1 {
+    font-size: clamp(2.15rem, 12vw, 3.25rem);
+  }
+
+  .estimator-page-content {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .estimator-progress {
+    gap: 0.25rem;
+    padding: 0.85rem 0.55rem;
+  }
+
+  .estimator-progress-step {
+    justify-content: center;
+  }
+
+  .estimator-progress-step:not(:last-child)::after {
+    right: -0.55rem;
+    width: calc(50% - 10px);
+  }
+
+  .estimator-progress-step small {
+    display: none;
+  }
+
+  .estimator-progress-step > span {
+    flex-basis: 28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .estimator-panel {
+    min-height: 0;
+    padding: 1.35rem;
+  }
+
+  .estimator-choice-grid,
+  .estimator-choice-grid.three,
+  .estimator-fields-grid,
+  .estimator-fields-grid.three,
+  .estimate-project-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .estimator-choice {
+    min-height: 92px;
+  }
+
+  .road-selector {
+    grid-template-columns: 72px minmax(120px, 1fr) 72px;
+  }
+
+  .road-selector > button {
+    padding: 0.35rem;
+    font-size: 0.65rem;
+  }
+
+  .road-selector > button span {
+    display: none;
+  }
+
+  .road-plot {
+    min-height: 120px;
+  }
+
+  .estimator-summary dl {
+    display: block;
+  }
+
+  .estimate-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .estimate-actions .btn-primary,
+  .estimate-actions .btn-secondary,
+  .estimate-actions .estimator-print {
+    width: 100%;
+    text-align: center;
+  }
+
+  .estimator-navigation .btn-primary {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+@media print {
+  .header,
+  .footer,
+  .estimator-page-hero,
+  .estimator-progress,
+  .estimator-summary,
+  .estimator-navigation,
+  .estimate-contact,
+  .Toastify {
+    display: none !important;
+  }
+
+  .estimator-page-content,
+  .estimator-panel {
+    padding: 0;
+  }
+
+  .estimator-layout {
+    display: block;
+  }
+
+  .estimator-panel {
+    border: 0;
+    box-shadow: none;
+  }
+
+  .estimator-step:not(.estimate-review) {
+    display: none;
+  }
+}
