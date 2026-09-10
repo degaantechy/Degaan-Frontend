@@ -8,6 +8,7 @@ import { useLanguage } from '../contexts/LanguageContext'
 import { API_BASE_URL } from '../lib/api'
 import { developments } from '../lib/developments'
 import { trackAnalyticsEvent } from '../lib/analytics'
+import { getAttribution } from '../lib/attribution'
 
 const firstValue = (value) => Array.isArray(value) ? value[0] : (value || '')
 
@@ -50,6 +51,7 @@ export default function Contact() {
     try {
       setLoading(true)
 
+      const attribution = getAttribution()
       const { project_location, timeline, ...apiData } = data
       const qualificationNotes = [
         project_location ? `Project / property location: ${project_location}` : '',
@@ -63,10 +65,10 @@ export default function Contact() {
         ...(propertyId ? { property: Number(propertyId) } : {}),
         project_slug: projectSlug,
         service,
-        source_page: router.asPath?.split('?')[0] || '/contact',
-        utm_source: firstValue(router.query.utm_source),
-        utm_medium: firstValue(router.query.utm_medium),
-        utm_campaign: firstValue(router.query.utm_campaign),
+        source_page: attribution.landing_page || router.asPath?.split('?')[0] || '/contact',
+        utm_source: firstValue(router.query.utm_source) || attribution.utm_source || '',
+        utm_medium: firstValue(router.query.utm_medium) || attribution.utm_medium || '',
+        utm_campaign: firstValue(router.query.utm_campaign) || attribution.utm_campaign || '',
       })
 
       trackAnalyticsEvent('generate_lead', {
