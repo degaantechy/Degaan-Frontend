@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 import ConstructionEstimator from '../components/ConstructionEstimator'
 import { useLanguage } from '../contexts/LanguageContext'
+import { trackAnalyticsEvent } from '../lib/analytics'
 
 const PAGE_COPY = {
   en: {
@@ -24,11 +26,16 @@ export default function ConstructionEstimatorPage() {
   const { language } = useLanguage()
   const copy = PAGE_COPY[language] || PAGE_COPY.en
 
+  useEffect(() => {
+    trackAnalyticsEvent('construction_estimator_view', { language })
+  }, [language])
+
   return (
     <>
       <Head>
         <title>{copy.seoTitle}</title>
         <meta name="description" content={copy.seoDescription} />
+        <link rel="canonical" href="https://www.degaanrealestate.com/construction-estimator" />
       </Head>
 
       <header className="estimator-page-hero">
