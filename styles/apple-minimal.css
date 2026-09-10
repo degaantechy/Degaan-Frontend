@@ -1,0 +1,889 @@
+/* Minimal, high-contrast presentation layer inspired by premium product storytelling.
+   Keeps Degaan's identity while reducing visual noise and fixing CTA contrast. */
+
+:root {
+  --ui-ink: #1d1d1f;
+  --ui-muted: #6e6e73;
+  --ui-soft: #f5f5f7;
+  --ui-soft-2: #fbfbfd;
+  --ui-line: #d2d2d7;
+  --ui-dark: #000000;
+  --ui-dark-soft: #161617;
+  --ui-brand: #8a6113;
+  --ui-brand-hover: #6f4d0d;
+  --header-height: 48px;
+}
+
+html {
+  background: #fff;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  color: var(--ui-ink);
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: rgba(205, 153, 51, 0.24);
+}
+
+.container {
+  max-width: 1120px;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+/* Navigation: quiet, compact, translucent. */
+.header {
+  background: rgba(250, 250, 252, 0.86);
+  border-bottom: 0;
+  box-shadow: none;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.header-content {
+  min-height: var(--header-height);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.brand-logo {
+  gap: 0.45rem;
+}
+
+.brand-logo-image {
+  width: 30px;
+}
+
+.brand-logo-text strong {
+  color: var(--ui-ink);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.brand-logo-text small {
+  display: none;
+}
+
+.nav {
+  gap: clamp(1rem, 2.2vw, 1.7rem);
+}
+
+.nav > a,
+.contact-menu-toggle {
+  color: var(--ui-ink);
+  font-size: 0.76rem;
+  font-weight: 450;
+  letter-spacing: 0;
+}
+
+.nav > a:hover,
+.nav > a:focus-visible,
+.contact-menu-toggle:hover,
+.contact-menu-toggle:focus-visible {
+  color: #000;
+  opacity: 0.62;
+}
+
+.contact-menu-toggle {
+  gap: 0.3rem;
+  padding: 0.4rem 0;
+  border: 0;
+}
+
+.contact-caret {
+  color: var(--ui-muted);
+  font-size: 0.8rem;
+}
+
+.contact-dropdown {
+  top: calc(100% + 8px);
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.contact-dropdown a {
+  border-radius: 11px;
+}
+
+.contact-dropdown a:hover,
+.contact-dropdown a:focus-visible {
+  background: var(--ui-soft);
+}
+
+.language-switcher {
+  gap: 0.2rem;
+  margin-left: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.language-switcher span {
+  height: 12px;
+  background: var(--ui-line);
+}
+
+.language-switcher button {
+  min-width: 27px;
+  padding: 0.25rem;
+  color: var(--ui-muted);
+  font-size: 0.66rem;
+  font-weight: 600;
+}
+
+.language-switcher button.active {
+  color: var(--ui-ink);
+  background: transparent;
+}
+
+/* One button system everywhere. Strong contrast is intentional. */
+.btn-primary,
+.btn-secondary,
+.btn-small,
+a.btn-primary,
+a.btn-secondary,
+a.btn-small,
+button.btn-primary,
+button.btn-secondary,
+button.btn-small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease, opacity 160ms ease;
+}
+
+.btn-primary,
+a.btn-primary,
+button.btn-primary {
+  color: #fff;
+  background: var(--ui-ink);
+  border: 1px solid var(--ui-ink);
+}
+
+.btn-primary:hover,
+a.btn-primary:hover,
+button.btn-primary:hover {
+  color: #fff;
+  background: #000;
+  border-color: #000;
+}
+
+.btn-secondary,
+a.btn-secondary,
+button.btn-secondary {
+  color: var(--ui-ink);
+  background: transparent;
+  border: 1px solid #86868b;
+}
+
+.btn-secondary:hover,
+a.btn-secondary:hover,
+button.btn-secondary:hover {
+  color: #fff;
+  background: var(--ui-ink);
+  border-color: var(--ui-ink);
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.btn-small:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-small:focus-visible,
+.text-link:focus-visible,
+.development-link:focus-visible,
+.hero-project-register:focus-visible {
+  outline: 3px solid rgba(138, 97, 19, 0.3);
+  outline-offset: 3px;
+}
+
+/* Dark-surface controls: explicit overrides prevent invisible links. */
+.hero .btn-primary,
+.subpage-hero .btn-primary,
+.development-detail-hero .btn-primary,
+.partner-banner .btn-primary,
+.home-quality .btn-primary,
+.cta-section .btn-primary {
+  color: var(--ui-ink);
+  background: #fff;
+  border-color: #fff;
+}
+
+.hero .btn-primary:hover,
+.subpage-hero .btn-primary:hover,
+.development-detail-hero .btn-primary:hover,
+.partner-banner .btn-primary:hover,
+.home-quality .btn-primary:hover,
+.cta-section .btn-primary:hover {
+  color: var(--ui-ink);
+  background: #e8e8ed;
+  border-color: #e8e8ed;
+}
+
+.hero .btn-secondary,
+.subpage-hero .btn-secondary,
+.development-detail-hero .btn-secondary,
+.partner-banner .btn-secondary,
+.home-quality .btn-secondary,
+.cta-section .btn-secondary {
+  color: #fff;
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+.hero .btn-secondary:hover,
+.subpage-hero .btn-secondary:hover,
+.development-detail-hero .btn-secondary:hover,
+.partner-banner .btn-secondary:hover,
+.home-quality .btn-secondary:hover,
+.cta-section .btn-secondary:hover {
+  color: var(--ui-ink);
+  background: #fff;
+  border-color: #fff;
+}
+
+.text-link,
+.development-link,
+.service-card a {
+  color: var(--ui-brand);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.text-link:hover,
+.development-link:hover,
+.service-card a:hover {
+  color: var(--ui-brand-hover);
+}
+
+/* Homepage hero: one message, two actions, imagery does the rest. */
+.hero {
+  min-height: 690px;
+  height: calc(100svh - var(--header-height));
+  align-items: flex-start;
+  padding: clamp(4.75rem, 10vh, 7.5rem) 22px 5.5rem;
+  background: #000;
+}
+
+.hero-scrim {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.24) 45%, rgba(0, 0, 0, 0.52) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.05));
+}
+
+.hero-content {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  padding-right: 0;
+  text-align: center;
+}
+
+.hero-company {
+  margin-bottom: 0.7rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
+
+.hero-content h1,
+.hero-corporate-title {
+  max-width: 900px;
+  margin: 0 auto 0.8rem;
+  color: #fff;
+  font-size: clamp(3.25rem, 7vw, 6.25rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.2);
+}
+
+.hero-tagline,
+.hero-content .hero-description {
+  max-width: 720px;
+  margin: 0 auto 1.6rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.2);
+}
+
+.hero-buttons {
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.hero .hero-buttons a {
+  min-width: 0;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+}
+
+.hero-project-register {
+  margin-top: 1.15rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+.hero-project-register:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.hero-controls {
+  right: 50%;
+  bottom: 1.6rem;
+  transform: translateX(50%);
+  gap: 0.55rem;
+}
+
+.hero-counter,
+.hero-arrows {
+  display: none;
+}
+
+.hero-dots {
+  display: flex;
+  gap: 7px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-dots button {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.hero-dots button.active {
+  width: 7px;
+  background: #fff;
+}
+
+/* Product-storytelling rhythm. */
+.corporate-intro,
+.home-capabilities,
+.home-quality,
+.home-work,
+.home-partner,
+.subpage-section,
+.development-detail-section,
+.trust-page,
+.projects-showcase {
+  padding-top: clamp(5.5rem, 9vw, 8.5rem);
+  padding-bottom: clamp(5.5rem, 9vw, 8.5rem);
+}
+
+.corporate-intro,
+.home-partner,
+.projects-showcase,
+.subpage-section,
+.development-detail-section {
+  background: #fff;
+}
+
+.home-capabilities,
+.home-work,
+.subpage-section.soft {
+  background: var(--ui-soft);
+}
+
+.eyebrow,
+.upgrade-kicker,
+.section-kicker,
+.work-card .work-meta {
+  color: var(--ui-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.corporate-intro-grid {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  text-align: center;
+}
+
+.corporate-intro h2,
+.home-capabilities h2,
+.home-quality h2,
+.home-work h2,
+.home-partner h2,
+.subpage-section h2,
+.development-detail-section h2,
+.section-heading h2 {
+  color: var(--ui-ink);
+  font-size: clamp(2.5rem, 5.4vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.corporate-intro-copy > p,
+.section-lead,
+.section-heading-upgrade > p,
+.section-heading-split > p,
+.development-description,
+.brand-pillar p,
+.capability-card p,
+.quality-card p,
+.work-card p,
+.process-card p,
+.qa-card p,
+.partner-card p,
+.development-feature-card p {
+  color: var(--ui-muted);
+}
+
+.corporate-intro-copy > p {
+  max-width: 760px;
+  margin: 0 auto 2rem;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.5;
+}
+
+.section-heading-upgrade,
+.section-heading-split {
+  display: block;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+}
+
+.section-heading-upgrade > p,
+.section-heading-split > p {
+  max-width: 720px;
+  margin: 1rem auto 0;
+  line-height: 1.55;
+}
+
+.brand-pillar-grid,
+.capability-grid,
+.quality-grid,
+.work-grid,
+.process-grid,
+.qa-grid,
+.partner-grid,
+.development-feature-grid {
+  gap: 1.25rem;
+}
+
+.brand-pillar,
+.capability-card,
+.quality-card,
+.work-card,
+.process-card,
+.qa-card,
+.partner-card,
+.development-feature-card,
+.service-card {
+  border: 0;
+  border-radius: 26px;
+  background: var(--ui-soft);
+  box-shadow: none;
+  padding: clamp(1.6rem, 3vw, 2.35rem);
+}
+
+.brand-pillar span,
+.capability-card > span,
+.process-card > span,
+.qa-card > span,
+.development-feature-card > span {
+  color: var(--ui-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.brand-pillar h3,
+.capability-card h3,
+.quality-card h3,
+.work-card h3,
+.process-card h3,
+.qa-card h3,
+.partner-card h3,
+.development-feature-card h3,
+.service-card h3 {
+  color: var(--ui-ink);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.projects-showcase {
+  padding-left: 0;
+  padding-right: 0;
+  background: #fff;
+}
+
+.developments-grid {
+  gap: 1.25rem;
+}
+
+.development-card {
+  border: 0;
+  border-radius: 28px;
+  background: var(--ui-soft);
+  overflow: hidden;
+}
+
+.development-image-wrap {
+  background: #e8e8ed;
+}
+
+.development-number {
+  display: none;
+}
+
+.development-concept {
+  padding: 0.5rem 0.7rem;
+  color: var(--ui-ink);
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 0.66rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.development-card h3,
+.development-price {
+  color: var(--ui-ink);
+}
+
+.development-location,
+.development-price span {
+  color: var(--ui-muted);
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.development-card-footer {
+  border-top-color: var(--ui-line);
+}
+
+.home-quality {
+  background: #000;
+}
+
+.home-quality h2,
+.home-quality .quality-card h3 {
+  color: #f5f5f7;
+}
+
+.home-quality .upgrade-kicker,
+.home-quality .section-lead,
+.home-quality .quality-card p {
+  color: #a1a1a6;
+}
+
+.home-quality .quality-card {
+  background: var(--ui-dark-soft);
+  border: 0;
+  border-radius: 26px;
+}
+
+.home-quality .quality-card strong {
+  color: #f5f5f7;
+}
+
+.partner-banner {
+  border-radius: 30px;
+  background: #000;
+  overflow: hidden;
+}
+
+.partner-banner h2 {
+  color: #f5f5f7;
+}
+
+.partner-banner p {
+  color: #a1a1a6;
+}
+
+/* Subpages: light editorial hero instead of large blocks of brand color. */
+.subpage-hero {
+  padding: clamp(6.5rem, 10vw, 9rem) 0 clamp(4.5rem, 8vw, 7rem);
+  background: var(--ui-soft);
+  color: var(--ui-ink);
+  text-align: center;
+}
+
+.subpage-hero h1 {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--ui-ink);
+  font-size: clamp(3rem, 7vw, 6.2rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.subpage-hero p {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--ui-muted);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.5;
+}
+
+.subpage-hero .upgrade-kicker {
+  color: var(--ui-muted);
+}
+
+.subpage-hero .subpage-actions {
+  justify-content: center;
+}
+
+/* Because subpage heroes are now light, return their CTA colors to light-surface rules. */
+.subpage-hero .btn-primary {
+  color: #fff;
+  background: var(--ui-ink);
+  border-color: var(--ui-ink);
+}
+
+.subpage-hero .btn-primary:hover {
+  color: #fff;
+  background: #000;
+  border-color: #000;
+}
+
+.subpage-hero .btn-secondary {
+  color: var(--ui-ink);
+  background: transparent;
+  border-color: #86868b;
+}
+
+.subpage-hero .btn-secondary:hover {
+  color: #fff;
+  background: var(--ui-ink);
+  border-color: var(--ui-ink);
+}
+
+.development-detail-hero {
+  background: #000;
+}
+
+.development-detail-hero h1 {
+  color: #f5f5f7;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+.development-detail-lead,
+.development-facts dt {
+  color: #a1a1a6;
+}
+
+.service-list {
+  border-top-color: var(--ui-line);
+}
+
+.service-list article,
+.service-list article:nth-child(even) {
+  border-color: var(--ui-line);
+}
+
+.service-list h3 {
+  color: var(--ui-ink);
+  font-weight: 600;
+}
+
+.service-list p {
+  color: var(--ui-muted);
+}
+
+.proof-note,
+.contact-context {
+  border-left: 0;
+  border-radius: 16px;
+  background: var(--ui-soft);
+}
+
+.concept-disclaimer {
+  border-color: var(--ui-line);
+  border-radius: 16px;
+  color: var(--ui-muted);
+}
+
+/* Forms and utility surfaces. */
+input,
+select,
+textarea {
+  border-radius: 12px;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 900px) {
+  .header-content {
+    min-height: 52px;
+  }
+
+  .brand-logo-image {
+    width: 31px;
+  }
+
+  .nav {
+    background: rgba(250, 250, 252, 0.97);
+    border-bottom: 0;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .nav > a,
+  .contact-menu-toggle {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .hero {
+    min-height: 650px;
+    padding-top: 4.25rem;
+  }
+
+  .hero-content h1,
+  .hero-corporate-title {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+  .brand-pillar-grid,
+  .capability-grid,
+  .quality-grid,
+  .work-grid,
+  .process-grid,
+  .qa-grid,
+  .partner-grid,
+  .development-feature-grid,
+  .developments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-banner {
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 620px) {
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .brand-logo-text {
+    display: none;
+  }
+
+  .hero {
+    min-height: 610px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero-content h1,
+  .hero-corporate-title {
+    font-size: clamp(2.8rem, 14vw, 4.2rem);
+  }
+
+  .hero-tagline,
+  .hero-content .hero-description {
+    font-size: 1.15rem;
+  }
+
+  .hero-buttons,
+  .subpage-actions,
+  .development-actions {
+    gap: 0.55rem;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-small,
+  a.btn-primary,
+  a.btn-secondary,
+  a.btn-small {
+    min-height: 42px;
+    padding: 0.68rem 1.05rem;
+    font-size: 0.84rem;
+  }
+
+  .corporate-intro,
+  .home-capabilities,
+  .home-quality,
+  .home-work,
+  .home-partner,
+  .subpage-section,
+  .development-detail-section,
+  .trust-page,
+  .projects-showcase {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .corporate-intro h2,
+  .home-capabilities h2,
+  .home-quality h2,
+  .home-work h2,
+  .home-partner h2,
+  .subpage-section h2,
+  .development-detail-section h2,
+  .section-heading h2 {
+    font-size: clamp(2.25rem, 11vw, 3.45rem);
+  }
+
+  .development-card,
+  .brand-pillar,
+  .capability-card,
+  .quality-card,
+  .work-card,
+  .process-card,
+  .qa-card,
+  .partner-card,
+  .development-feature-card {
+    border-radius: 22px;
+  }
+}
