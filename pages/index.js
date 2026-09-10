@@ -125,7 +125,7 @@ export default function Home() {
             </div>
             <div className="reason">
               <h4>{t('home.qualityTitle')}</h4>
-              <p>{language === 'so' ? t('home.qualityText') : 'Builds built with international standards and building codes.'}</p>
+              <p>{language === 'so' ? t('home.qualityText') : 'buildings executed with international standard of building codes.'}</p>
             </div>
             <div className="reason">
               <h4>{t('home.pricingTitle')}</h4>
