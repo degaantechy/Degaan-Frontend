@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useLanguage } from '../contexts/LanguageContext'
 import { getLocalizedPropertyField, getPropertyStatus } from '../lib/translations'
+import { trackAnalyticsEvent } from '../lib/analytics'
 
 export default function PropertyCard({ property }) {
   const { language, t } = useLanguage()
@@ -28,13 +29,15 @@ export default function PropertyCard({ property }) {
           <span>{property.size} {t('property.areaUnit')}</span>
         </div>
 
-        <p className="description">
-          {description?.substring(0, 100)}...
-        </p>
+        <p className="description">{description?.substring(0, 100)}...</p>
 
         <div className="property-footer">
           <div className="price">${property.price?.toLocaleString()}</div>
-          <Link href={`/property/${property.id}`} className="btn-small">
+          <Link
+            href={`/property/${property.id}`}
+            className="btn-small"
+            onClick={() => trackAnalyticsEvent('property_view', { property_id: property.id, property_status: property.status })}
+          >
             {t('property.viewDetails')}
           </Link>
         </div>
