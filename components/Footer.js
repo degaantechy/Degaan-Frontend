@@ -28,6 +28,7 @@ export default function Footer() {
               <li><Link href="/developments">{t('header.developments')}</Link></li>
               <li><Link href="/properties">{t('header.buy')}</Link></li>
               <li><Link href="/insights">{t('header.insights')}</Link></li>
+              <li><Link href="/about">{t('footer.about')}</Link></li>
               <li><Link href="/contact">{t('header.contact')}</Link></li>
             </ul>
           </div>
