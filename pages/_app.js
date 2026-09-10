@@ -1,4 +1,5 @@
 import '../styles/stylesglobals.css'
+import '../styles/brand-upgrade.css'
 import Head from 'next/head'
 import Layout from '../components/Layout'
 import GoogleAnalytics from '../components/GoogleAnalytics'
