@@ -18,6 +18,7 @@ export default function Contact() {
 
   const projectSlug = firstValue(router.query.project)
   const service = firstValue(router.query.service)
+  const propertyId = firstValue(router.query.property)
   const project = developments.find((item) => item.slug === projectSlug)
 
   const serviceLabels = {
@@ -34,11 +35,15 @@ export default function Contact() {
     landowner: 'landowner',
   }
 
+  const propertyLabel = propertyId
+    ? (language === 'so' ? `Hanti #${propertyId}` : `Property #${propertyId}`)
+    : ''
+
   const formContext = {
     projectSlug,
     projectLabel: project?.name || projectSlug,
-    serviceLabel: serviceLabels[service] || service,
-    interestType: projectSlug ? 'development' : (interestMap[service] || ''),
+    serviceLabel: serviceLabels[service] || service || propertyLabel,
+    interestType: projectSlug ? 'development' : (interestMap[service] || (propertyId ? 'buy' : '')),
   }
 
   const handleSubmit = async (data) => {
@@ -55,6 +60,7 @@ export default function Contact() {
       await axios.post(`${API_BASE_URL}/api/leads/`, {
         ...apiData,
         message,
+        ...(propertyId ? { property: Number(propertyId) } : {}),
         project_slug: projectSlug,
         service,
         source_page: router.asPath?.split('?')[0] || '/contact',
@@ -66,6 +72,7 @@ export default function Contact() {
       trackAnalyticsEvent('generate_lead', {
         form_name: 'contact',
         interest_type: apiData.interest_type,
+        property_id: propertyId || undefined,
         project: projectSlug || undefined,
         service: service || undefined,
       })
@@ -102,7 +109,7 @@ export default function Contact() {
                 href="https://wa.me/252638888250"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackAnalyticsEvent('whatsapp_click', { placement: 'contact_page', project: projectSlug || undefined, service: service || undefined })}
+                onClick={() => trackAnalyticsEvent('whatsapp_click', { placement: 'contact_page', property_id: propertyId || undefined, project: projectSlug || undefined, service: service || undefined })}
               >
                 {t('contact.chatWhatsapp')}
               </a>
