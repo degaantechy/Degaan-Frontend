@@ -3,7 +3,8 @@ import Image from 'next/image'
 import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Footer() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer className="footer">
@@ -26,6 +27,7 @@ export default function Footer() {
             <h4>{t('footer.quickLinks')}</h4>
             <ul>
               <li><Link href="/developments">{t('header.developments')}</Link></li>
+              <li><Link href="/projects">{language === 'so' ? 'Shaqooyinka' : 'Selected Work'}</Link></li>
               <li><Link href="/properties">{t('header.buy')}</Link></li>
               <li><Link href="/insights">{t('header.insights')}</Link></li>
               <li><Link href="/about">{t('footer.about')}</Link></li>
@@ -36,9 +38,11 @@ export default function Footer() {
           <div className="footer-section">
             <h4>{t('footer.services')}</h4>
             <ul>
-              <li><a href="/construction-estimator">{t('footer.construction')}</a></li>
-              <li><a href="/contact?service=valuation">{t('footer.valuation')}</a></li>
-              <li><a href="/contact?service=investment">{t('footer.investment')}</a></li>
+              <li><Link href="/construction">{t('footer.construction')}</Link></li>
+              <li><Link href="/construction-estimator">{language === 'so' ? 'Qiyaas Dhisme' : 'Construction Estimator'}</Link></li>
+              <li><Link href="/contact?service=valuation">{t('footer.valuation')}</Link></li>
+              <li><Link href="/partner">{language === 'so' ? 'Dhul & Maalgashi' : 'Land & Investment'}</Link></li>
+              <li><Link href="/contact?service=investment">{t('footer.investment')}</Link></li>
             </ul>
           </div>
 
@@ -51,7 +55,11 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; 2025 Degaan Real Estate. {t('footer.rights')}</p>
+          <p>&copy; {currentYear} Degaan Real Estate &amp; Construction. {t('footer.rights')}</p>
+          <div className="footer-legal-links">
+            <Link href="/privacy">{language === 'so' ? 'Asturnaanta' : 'Privacy'}</Link>
+            <Link href="/terms">{language === 'so' ? 'Shuruudaha' : 'Terms'}</Link>
+          </div>
         </div>
       </div>
     </footer>
