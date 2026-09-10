@@ -2,11 +2,21 @@ import Script from 'next/script'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
+import { captureAttribution } from '../lib/attribution'
+
 const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 const hasValidMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId || '')
 
 export default function GoogleAnalytics() {
   const router = useRouter()
+
+  useEffect(() => {
+    captureAttribution()
+
+    const captureRouteAttribution = () => captureAttribution()
+    router.events.on('routeChangeComplete', captureRouteAttribution)
+    return () => router.events.off('routeChangeComplete', captureRouteAttribution)
+  }, [router.events])
 
   useEffect(() => {
     if (!hasValidMeasurementId) return undefined
