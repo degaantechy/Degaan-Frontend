@@ -10,6 +10,7 @@ function createSitemap() {
     '/construction',
     '/construction-estimator',
     '/projects',
+    '/projects/sareedo-court',
     '/insights',
     '/about',
     '/partner',
