@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
+import { trackAnalyticsEvent } from '../lib/analytics'
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -17,9 +18,7 @@ export default function Header() {
     }
 
     const closeOnEscape = (event) => {
-      if (event.key === 'Escape') {
-        setContactOpen(false)
-      }
+      if (event.key === 'Escape') setContactOpen(false)
     }
 
     document.addEventListener('pointerdown', closeOnOutsideClick)
@@ -34,6 +33,11 @@ export default function Header() {
   const closeNavigation = () => {
     setMenuOpen(false)
     setContactOpen(false)
+  }
+
+  const changeLanguage = (nextLanguage) => {
+    setLanguage(nextLanguage)
+    trackAnalyticsEvent('language_change', { language: nextLanguage })
   }
 
   return (
@@ -64,17 +68,16 @@ export default function Header() {
           aria-expanded={menuOpen}
           aria-controls="primary-navigation"
         >
-          <span aria-hidden="true" className="menu-icon">
-            <span />
-            <span />
-          </span>
+          <span aria-hidden="true" className="menu-icon"><span /><span /></span>
           <span className="sr-only">{menuOpen ? t('header.closeMenu') : t('header.openMenu')}</span>
         </button>
 
         <nav id="primary-navigation" className={`nav ${menuOpen ? 'open' : ''}`}>
           <Link href="/developments" onClick={closeNavigation}>{t('header.developments')}</Link>
           <Link href="/properties" onClick={closeNavigation}>{t('header.buy')}</Link>
+          <Link href="/construction" onClick={closeNavigation}>{language === 'so' ? 'Dhismaha' : 'Construction'}</Link>
           <Link href="/insights" onClick={closeNavigation}>{t('header.insights')}</Link>
+          <Link href="/about" onClick={closeNavigation}>{language === 'so' ? 'Nagu Saabsan' : 'About'}</Link>
 
           <div ref={contactMenuRef} className={`contact-menu ${contactOpen ? 'open' : ''}`}>
             <button
@@ -102,7 +105,10 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 role="menuitem"
-                onClick={closeNavigation}
+                onClick={() => {
+                  trackAnalyticsEvent('whatsapp_click', { placement: 'header' })
+                  closeNavigation()
+                }}
               >
                 <span>
                   <strong>{t('header.whatsappContact')}</strong>
@@ -114,25 +120,9 @@ export default function Header() {
           </div>
 
           <div className="language-switcher" role="group" aria-label={t('language.label')}>
-            <button
-              type="button"
-              className={language === 'en' ? 'active' : ''}
-              aria-pressed={language === 'en'}
-              onClick={() => setLanguage('en')}
-              title={t('language.english')}
-            >
-              EN
-            </button>
+            <button type="button" className={language === 'en' ? 'active' : ''} aria-pressed={language === 'en'} onClick={() => changeLanguage('en')} title={t('language.english')}>EN</button>
             <span aria-hidden="true"></span>
-            <button
-              type="button"
-              className={language === 'so' ? 'active' : ''}
-              aria-pressed={language === 'so'}
-              onClick={() => setLanguage('so')}
-              title={t('language.somali')}
-            >
-              SO
-            </button>
+            <button type="button" className={language === 'so' ? 'active' : ''} aria-pressed={language === 'so'} onClick={() => changeLanguage('so')} title={t('language.somali')}>SO</button>
           </div>
         </nav>
       </div>
